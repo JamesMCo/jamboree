@@ -1,0 +1,40 @@
+{
+    "schemaVersion": 1,
+    "id": "jamboree",
+    "version": "${version}",
+
+    "environment": "client",
+    "entrypoints": {
+        "main": [
+            {
+                "value": "uk.mrjamesco.jamboree.Jamboree",
+                "adapter": "kotlin"
+            }
+        ]
+    },
+    "depends": {
+        "fabricloader": ">=${fabric_loader_version}",
+        "minecraft": "~${minecraft_version}",
+        "java": ">=21",
+        "fabric-api": "*",
+        "fabric-language-kotlin": "*"
+    },
+
+    "name": "Jamboree",
+    "description": "Miscellaneous utility stuff",
+    "contact": {
+        "homepage": "https://github.com/JamesMCo/jamboree",
+        "issues": "https://github.com/JamesMCo/jamboree/issues",
+        "sources": "https://github.com/JamesMCo/jamboree"
+    },
+    "authors": [
+        {
+            "name": "James C.",
+            "contact": {
+                "homepage": "https://mrjamesco.uk"
+            }
+        }
+    ],
+    "license": "MIT",
+    "icon": "icon.png"
+}
