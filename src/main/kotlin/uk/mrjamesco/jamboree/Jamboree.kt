@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory
 class Jamboree: ModInitializer {
     override fun onInitialize() {
         logger.info("Initialising Jamboree v${FabricLoader.getInstance().getModContainer("jamboree").get().metadata.version}")
+        Config.init()
         ChatDing.registerListeners()
     }
 

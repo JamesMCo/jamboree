@@ -8,8 +8,8 @@ import uk.mrjamesco.jamboree.Jamboree.Companion.logger
 object ChatDing {
     fun registerListeners() {
         logger.info("Registering ChatDing listeners")
-        ClientReceiveMessageEvents.CHAT.register { message, _, _, _, _ -> testMessage(message.string, "CHAT") }
-        ClientReceiveMessageEvents.GAME.register { message, _ -> testMessage(message.string, "GAME") }
+        ClientReceiveMessageEvents.CHAT.register { message, _, _, _, _ -> if (Config.ChatDing.enabled) testMessage(message.string, "CHAT") }
+        ClientReceiveMessageEvents.GAME.register { message, _ -> if (Config.ChatDing.enabled) testMessage(message.string, "GAME") }
     }
 
     fun testMessage(message: String, messageType: String) {

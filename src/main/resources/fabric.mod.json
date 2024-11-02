@@ -10,6 +10,12 @@
                 "value": "uk.mrjamesco.jamboree.Jamboree",
                 "adapter": "kotlin"
             }
+        ],
+        "modmenu": [
+            {
+                "value": "uk.mrjamesco.jamboree.ModMenuIntegration",
+                "adapter": "kotlin"
+            }
         ]
     },
     "depends": {
@@ -17,7 +23,8 @@
         "minecraft": "~${minecraft_version}",
         "java": ">=21",
         "fabric-api": "*",
-        "fabric-language-kotlin": "*"
+        "fabric-language-kotlin": "*",
+        "yet_another_config_lib_v3": ">=${yacl_version}"
     },
 
     "name": "Jamboree",

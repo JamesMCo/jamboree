@@ -10,6 +10,15 @@ plugins {
 group = property("maven_group")!!
 version = property("mod_version")!!
 
+repositories {
+    maven("https://maven.terraformersmc.com") {
+        name = "Terraformers"
+    }
+    maven("https://maven.isxander.dev/releases") {
+        name = "Xander Maven"
+    }
+}
+
 val transitiveInclude: Configuration by configurations.creating {
     exclude(group = "com.mojang")
     exclude(group = "org.jetbrains.kotlin")
@@ -23,6 +32,8 @@ dependencies {
 
     modImplementation(libs.fabric.kotlin)
     modImplementation(libs.fabric.api)
+    modImplementation(libs.modmenu)
+    modImplementation(libs.yacl)
 
     implementation(libs.slf4j)
 
@@ -38,7 +49,8 @@ tasks {
             expand(getProperties() + mutableMapOf(
                 "version" to project.version,
                 "minecraft_version" to libs.versions.minecraft.get(),
-                "fabric_loader_version" to libs.versions.fabric.loader.get()
+                "fabric_loader_version" to libs.versions.fabric.loader.get(),
+                "yacl_version" to libs.versions.yacl.get()
             ))
         }
     }
