@@ -13,9 +13,13 @@ object ChatDing {
     }
 
     fun testMessage(message: String, messageType: String) {
-        if ("jammy" in message.lowercase()) {
-            logger.info("Found \"jammy\" in $messageType message")
-            MinecraftClient.getInstance().player?.playSound(SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(), 1.0f, 1.0f)
+        message.lowercase().let { lowercase ->
+            for (candidate: String in Config.ChatDing.filters) {
+                if (candidate in lowercase) {
+                    logger.info("Found \"$candidate\" in $messageType message")
+                    MinecraftClient.getInstance().player?.playSound(SoundEvents.BLOCK_NOTE_BLOCK_CHIME.value(), 1.0f, 1.0f)
+                }
+            }
         }
     }
 }

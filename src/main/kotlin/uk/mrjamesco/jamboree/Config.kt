@@ -1,11 +1,13 @@
 package uk.mrjamesco.jamboree
 
+import dev.isxander.yacl3.api.ListOption
 import dev.isxander.yacl3.api.OptionDescription
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler
 import dev.isxander.yacl3.config.v2.api.SerialEntry
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder
 import dev.isxander.yacl3.dsl.YetAnotherConfigLib
 import dev.isxander.yacl3.dsl.binding
+import dev.isxander.yacl3.dsl.stringField
 import dev.isxander.yacl3.dsl.tickBox
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.gui.screen.Screen
@@ -17,9 +19,32 @@ class Config {
     @SerialEntry
     var chatDingEnabled: Boolean = true
 
+    @SerialEntry
+    var chatDingFilters: List<String> = emptyList()
+        set(value) {
+            val lowercase: List<String> = value.map(String::lowercase)
+
+            // A long string containing a short string will always be triggered by the short string,
+            // so no need to also filter by the long string
+            // e.g. The filters ABC and ABCDE, ABCDE is redundant when ABC already triggers
+
+            val filtered: MutableSet<String> = mutableSetOf()
+            lowercase.sortedBy { it.length }.forEach { candidate ->
+                if (candidate.isEmpty()) return@forEach
+                if (filtered.all { it !in candidate }) {
+                    filtered.add(candidate)
+                }
+            }
+
+            field = lowercase.filter { it in filtered }
+        }
+
     object ChatDing {
         val enabled: Boolean
             get() = handler.instance().chatDingEnabled
+
+        val filters: List<String>
+            get() = handler.instance().chatDingFilters
     }
 
     companion object {
@@ -56,6 +81,13 @@ class Config {
                         controller(tickBox())
                     }
                 }
+                groups.register("chatdingfilters", ListOption.createBuilder<String>()
+                    .name(Text.literal("Chat Ding Filters"))
+                    .binding(emptyList(), { handler.instance().chatDingFilters }, { value -> handler.instance().chatDingFilters = value })
+                    .controller(stringField())
+                    .initial("")
+                    .build()
+                )
             }
         }.generateScreen(parentScreen)
     }
