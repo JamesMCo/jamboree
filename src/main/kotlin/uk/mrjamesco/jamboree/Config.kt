@@ -83,6 +83,10 @@ class Config {
                 }
                 groups.register("chatdingfilters", ListOption.createBuilder<String>()
                     .name(Text.literal("Chat Ding Filters"))
+                    .description(OptionDescription.of(Text.literal(
+                        "The list of phrases that should cause a sound to play when sent in chat.\n\n" +
+                        "If a phrase in the list is included within a longer phrase, only the shorter phrase will be kept."
+                    )))
                     .binding(emptyList(), { handler.instance().chatDingFilters }, { value -> handler.instance().chatDingFilters = value })
                     .controller(stringField())
                     .initial("")
