@@ -7,10 +7,12 @@ import dev.isxander.yacl3.config.v2.api.SerialEntry
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder
 import dev.isxander.yacl3.dsl.YetAnotherConfigLib
 import dev.isxander.yacl3.dsl.binding
+import dev.isxander.yacl3.dsl.enumDropdown
 import dev.isxander.yacl3.dsl.stringField
 import dev.isxander.yacl3.dsl.tickBox
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.gui.screen.Screen
+import net.minecraft.sound.SoundEvent
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import uk.mrjamesco.jamboree.Jamboree.Companion.logger
@@ -18,6 +20,9 @@ import uk.mrjamesco.jamboree.Jamboree.Companion.logger
 class Config {
     @SerialEntry
     var chatDingEnabled: Boolean = true
+
+    @SerialEntry
+    var chatDingSound: uk.mrjamesco.jamboree.ChatDing.NotificationSound = uk.mrjamesco.jamboree.ChatDing.NotificationSound.Chime
 
     @SerialEntry
     var chatDingFilters: List<String> = emptyList()
@@ -42,6 +47,9 @@ class Config {
     object ChatDing {
         val enabled: Boolean
             get() = handler.instance().chatDingEnabled
+
+        val sound: SoundEvent
+            get() = handler.instance().chatDingSound.sound
 
         val filters: List<String>
             get() = handler.instance().chatDingFilters
@@ -79,6 +87,12 @@ class Config {
                         description(OptionDescription.of(Text.literal("When enabled, Chat Ding plays a sound when one of the filter phrases is sent in chat.")))
                         binding(handler.instance()::chatDingEnabled, true)
                         controller(tickBox())
+                    }
+                    options.register<uk.mrjamesco.jamboree.ChatDing.NotificationSound>("sound") {
+                        name(Text.literal("Notification Sound"))
+                        description(OptionDescription.of(Text.literal("The sound that plays when one of the filter phrases is sent in chat.")))
+                        binding(handler.instance()::chatDingSound, uk.mrjamesco.jamboree.ChatDing.NotificationSound.Chime)
+                        controller(enumDropdown<uk.mrjamesco.jamboree.ChatDing.NotificationSound>())
                     }
                 }
                 groups.register("chatdingfilters", ListOption.createBuilder<String>()
