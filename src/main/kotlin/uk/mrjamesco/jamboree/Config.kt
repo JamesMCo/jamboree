@@ -76,7 +76,7 @@ class Config {
 
                     options.register<Boolean>("enabled") {
                         name(Text.literal("Enabled"))
-                        description(OptionDescription.of(Text.literal("When enabled, Chat Ding plays a sound when one of the trigger phrases is sent in chat.")))
+                        description(OptionDescription.of(Text.literal("When enabled, Chat Ding plays a sound when one of the filter phrases is sent in chat.")))
                         binding(handler.instance()::chatDingEnabled, true)
                         controller(tickBox())
                     }
