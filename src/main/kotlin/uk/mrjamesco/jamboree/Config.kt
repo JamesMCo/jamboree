@@ -73,34 +73,31 @@ class Config {
         }
 
         fun getScreen(parentScreen: Screen): Screen = YetAnotherConfigLib("jamboree") {
-            title(Text.literal("Jamboree"))
+            title(Text.translatable("config.jamboree"))
             save(handler::save)
 
             categories.register("jamboree") {
-                name(Text.literal("Jamboree"))
+                name(Text.translatable("config.jamboree"))
 
                 groups.register("chatding") {
-                    name(Text.literal("Chat Ding"))
+                    name(Text.translatable("config.jamboree.chatding"))
 
                     options.register<Boolean>("enabled") {
-                        name(Text.literal("Enabled"))
-                        description(OptionDescription.of(Text.literal("When enabled, Chat Ding plays a sound when one of the filter phrases is sent in chat.")))
+                        name(Text.translatable("config.jamboree.chatding.enabled.name"))
+                        description(OptionDescription.of(Text.translatable("config.jamboree.chatding.enabled.description")))
                         binding(handler.instance()::chatDingEnabled, true)
                         controller(tickBox())
                     }
                     options.register<uk.mrjamesco.jamboree.ChatDing.NotificationSound>("sound") {
-                        name(Text.literal("Notification Sound"))
-                        description(OptionDescription.of(Text.literal("The sound that plays when one of the filter phrases is sent in chat.")))
+                        name(Text.translatable("config.jamboree.chatding.sound.name"))
+                        description(OptionDescription.of(Text.translatable("config.jamboree.chatding.sound.description")))
                         binding(handler.instance()::chatDingSound, uk.mrjamesco.jamboree.ChatDing.NotificationSound.Chime)
                         controller(enumDropdown<uk.mrjamesco.jamboree.ChatDing.NotificationSound>())
                     }
                 }
                 groups.register("chatdingfilters", ListOption.createBuilder<String>()
-                    .name(Text.literal("Chat Ding Filters"))
-                    .description(OptionDescription.of(Text.literal(
-                        "The list of phrases that should cause a sound to play when sent in chat.\n\n" +
-                        "If a phrase in the list is included within a longer phrase, only the shorter phrase will be kept."
-                    )))
+                    .name(Text.translatable("config.jamboree.chatding.filters.name"))
+                    .description(OptionDescription.of(Text.translatable("config.jamboree.chatding.filters.description")))
                     .binding(emptyList(), { handler.instance().chatDingFilters }, { value -> handler.instance().chatDingFilters = value })
                     .controller(stringField())
                     .initial("")
