@@ -2,7 +2,8 @@
 
 A Minecraft Fabric mod containing miscellaneous utility stuff
 
-**Requires Minecraft 1.21.1 or higher, and [Yet Another Config Lib](https://modrinth.com/mod/yacl).**  
+**Requires Minecraft 1.21.1 or higher, [Fabric Language Kotlin](https://modrinth.com/mod/fabric-language-kotlin),
+and [Yet Another Config Lib](https://modrinth.com/mod/yacl).**  
 _(Some features require [Noxesium](https://modrinth.com/noxesium) - see below)_
 
 - Chat Ding: play a sound when certain phrases or words appear in messages in chat
