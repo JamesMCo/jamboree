@@ -72,6 +72,7 @@ object ChatDing {
                 if (candidate in lowercase) {
                     logger.info("Found \"$candidate\" in $messageType message")
                     Minecraft.getInstance().player?.playSound(Config.ChatDing.sound, Config.ChatDing.volume, Config.ChatDing.pitch)
+                    return
                 }
             }
         }
