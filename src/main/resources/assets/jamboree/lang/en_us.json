@@ -9,6 +9,14 @@
     "config.jamboree.chatding.filters.name": "Chat Ding Filters",
     "config.jamboree.chatding.filters.description": "The list of phrases that should cause a sound to play when sent in chat.\n\nIf a phrase in the list is included within a longer phrase, only the shorter phrase will be kept.",
 
+    "config.jamboree.compactfishing": "Compact Fishing",
+    "config.jamboree.compactfishing.enabled.name": "Enabled",
+    "config.jamboree.compactfishing.enabled.description": "When enabled, Compact Fishing combines the multiple messages shown when catching a fish on MCC Island in to one message. Requires Noxesium.",
+    "config.jamboree.compactfishing.showicons.name": "Show Icons",
+    "config.jamboree.compactfishing.showicons.description": "When enabled, show the icons of all \"Triggered:\" and \"Special:\" chat messages associated with the catch.",
+    "config.jamboree.compactfishing.showxp.name": "Show XP",
+    "config.jamboree.compactfishing.showxp.description": "When enabled, show the amount of Island XP awarded for the catch.",
+
     "modmenu.nameTranslation.jamboree": "Jamboree",
     "modmenu.descriptionTranslation.jamboree": "Miscellaneous utility stuff",
     "modmenu.summaryTranslation.jamboree": "Miscellaneous utility stuff"

@@ -17,6 +17,22 @@ repositories {
     maven("https://maven.isxander.dev/releases") {
         name = "Xander Maven"
     }
+    maven("https://maven.noxcrew.com/public") {
+        name = "Noxcrew Public Maven Repository"
+    }
+    maven("https://maven.enginehub.org/repo/") {
+        name = "EngineHub"
+    }
+    exclusiveContent {
+        forRepository {
+            maven("https://api.modrinth.com/maven") {
+                name = "Modrinth"
+            }
+        }
+        filter {
+            includeGroup("maven.modrinth")
+        }
+    }
 }
 
 val transitiveInclude: Configuration by configurations.creating {
@@ -33,6 +49,7 @@ dependencies {
     modImplementation(libs.fabric.kotlin)
     modImplementation(libs.fabric.api)
     modImplementation(libs.modmenu)
+    modImplementation(libs.noxesium)
     modImplementation(libs.yacl)
 
     implementation(libs.slf4j)
@@ -49,6 +66,7 @@ tasks {
             expand(getProperties() + mutableMapOf(
                 "version" to project.version,
                 "minecraft_version" to libs.versions.minecraft.get(),
+                "noxesium_version" to libs.versions.noxesium.get(),
                 "fabric_loader_version" to libs.versions.fabric.loader.get(),
                 "yacl_version" to libs.versions.yacl.get()
             ))

@@ -44,6 +44,15 @@ class Config {
             field = lowercase.filter { it in filtered }
         }
 
+    @SerialEntry
+    var compactFishingEnabled: Boolean = false
+
+    @SerialEntry
+    var compactFishingShowIcons: Boolean = true
+
+    @SerialEntry
+    var compactFishingShowXP: Boolean = true
+
     object ChatDing {
         val enabled: Boolean
             get() = handler.instance().chatDingEnabled
@@ -53,6 +62,17 @@ class Config {
 
         val filters: List<String>
             get() = handler.instance().chatDingFilters
+    }
+
+    object CompactFishing {
+        val enabled: Boolean
+            get() = handler.instance().compactFishingEnabled
+
+        val showIcons: Boolean
+            get() = handler.instance().compactFishingShowIcons
+
+        val showXP: Boolean
+            get() = handler.instance().compactFishingShowXP
     }
 
     companion object {
@@ -103,6 +123,29 @@ class Config {
                     .initial("")
                     .build()
                 )
+
+                groups.register("compactfishing") {
+                    name(Component.translatable("config.jamboree.compactfishing"))
+
+                    options.register<Boolean>("enabled") {
+                        name(Component.translatable("config.jamboree.compactfishing.enabled.name"))
+                        description(OptionDescription.of(Component.translatable("config.jamboree.compactfishing.enabled.description")))
+                        binding(handler.instance()::compactFishingEnabled, false)
+                        controller(tickBox())
+                    }
+                    options.register<Boolean>("showicons") {
+                        name(Component.translatable("config.jamboree.compactfishing.showicons.name"))
+                        description(OptionDescription.of(Component.translatable("config.jamboree.compactfishing.showicons.description")))
+                        binding(handler.instance()::compactFishingShowIcons, true)
+                        controller(tickBox())
+                    }
+                    options.register<Boolean>("showxp") {
+                        name(Component.translatable("config.jamboree.compactfishing.showxp.name"))
+                        description(OptionDescription.of(Component.translatable("config.jamboree.compactfishing.showxp.description")))
+                        binding(handler.instance()::compactFishingShowXP, true)
+                        controller(tickBox())
+                    }
+                }
             }
         }.generateScreen(parentScreen)
     }

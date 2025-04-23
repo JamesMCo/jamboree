@@ -26,6 +26,9 @@
         "fabric-language-kotlin": "*",
         "yet_another_config_lib_v3": ">=${yacl_version}"
     },
+    "recommends": {
+        "noxesium": ">=${noxesium_version}"
+    },
 
     "name": "Jamboree",
     "description": "Miscellaneous utility stuff",

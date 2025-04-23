@@ -10,6 +10,7 @@ class Jamboree: ModInitializer {
         logger.info("Initialising Jamboree v${FabricLoader.getInstance().getModContainer("jamboree").get().metadata.version}")
         Config.init()
         ChatDing.registerListeners()
+        CompactFishing.registerListeners()
     }
 
     companion object {
