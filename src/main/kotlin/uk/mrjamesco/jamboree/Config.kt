@@ -8,6 +8,7 @@ import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder
 import dev.isxander.yacl3.dsl.YetAnotherConfigLib
 import dev.isxander.yacl3.dsl.binding
 import dev.isxander.yacl3.dsl.enumDropdown
+import dev.isxander.yacl3.dsl.slider
 import dev.isxander.yacl3.dsl.stringField
 import dev.isxander.yacl3.dsl.tickBox
 import net.fabricmc.loader.api.FabricLoader
@@ -23,6 +24,12 @@ class Config {
 
     @SerialEntry
     var chatDingSound: uk.mrjamesco.jamboree.ChatDing.NotificationSound = uk.mrjamesco.jamboree.ChatDing.NotificationSound.Chime
+
+    @SerialEntry
+    var chatDingPitch: Float = 1.0f
+
+    @SerialEntry
+    var chatDingVolume: Int = 100
 
     @SerialEntry
     var chatDingFilters: List<String> = emptyList()
@@ -59,6 +66,12 @@ class Config {
 
         val sound: SoundEvent
             get() = handler.instance().chatDingSound.sound
+
+        val pitch: Float
+            get() = handler.instance().chatDingPitch.coerceIn(0.0f..2.0f)
+
+        val volume: Float
+            get() = handler.instance().chatDingVolume.coerceIn(0..100) / 100.0f
 
         val filters: List<String>
             get() = handler.instance().chatDingFilters
@@ -113,6 +126,18 @@ class Config {
                         description(OptionDescription.of(Component.translatable("config.jamboree.chatding.sound.description")))
                         binding(handler.instance()::chatDingSound, uk.mrjamesco.jamboree.ChatDing.NotificationSound.Chime)
                         controller(enumDropdown<uk.mrjamesco.jamboree.ChatDing.NotificationSound>())
+                    }
+                    options.register<Float>("pitch") {
+                        name(Component.translatable("config.jamboree.chatding.pitch.name"))
+                        description(OptionDescription.of(Component.translatable("config.jamboree.chatding.pitch.description")))
+                        binding(handler.instance()::chatDingPitch, 1.0f)
+                        controller(slider(0.0f..2.0f, 0.1f))
+                    }
+                    options.register<Int>("volume") {
+                        name(Component.translatable("config.jamboree.chatding.volume.name"))
+                        description(OptionDescription.of(Component.translatable("config.jamboree.chatding.volume.description")))
+                        binding(handler.instance()::chatDingVolume, 100)
+                        controller(slider(0..100, 1))
                     }
                 }
                 groups.register("chatdingfilters", ListOption.createBuilder<String>()
