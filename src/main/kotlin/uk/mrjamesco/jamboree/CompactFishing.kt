@@ -11,10 +11,35 @@ import net.minecraft.network.chat.MutableComponent
 import uk.mrjamesco.jamboree.Jamboree.Companion.logger
 
 object CompactFishing {
+    fun altIconOrder(iconText: String): Int = when (iconText) {
+        // Order suggested by Dwittyy
+        // https://github.com/JamesMCo/jamboree/issues/1
+
+        "Elusive Catch" -> 0
+
+        "XP Magnet" -> 1
+        "Fish Magnet" -> 2
+        "Pearl Magnet" -> 3
+        "Treasure Magnet" -> 4
+        "Spirit Magnet" -> 5
+
+        "Boosted Rod" -> 6
+        "Speedy Rod" -> 7
+        "Graceful Rod" -> 8
+        "Glitched Rod" -> 9
+        "Stable Rod" -> 10
+
+        "Supply Preserve" -> 11
+
+        else -> Int.MAX_VALUE
+    }
+
     private var onMCCIsland: Boolean = false
     private var onFishingIsland: Boolean = false
 
-    private val messageBuffer: MutableList<MutableComponent> = mutableListOf()
+    private var caughtMessage: MutableComponent? = null
+    private val iconBuffer: MutableList<Pair<MutableComponent, Int>> = mutableListOf()
+    private var xpMessage: MutableComponent? = null
     private var flushingBuffer: Boolean = false
 
     fun registerListeners() {
@@ -39,20 +64,19 @@ object CompactFishing {
 
             if (Config.CompactFishing.enabled && onMCCIsland && onFishingIsland) {
                 if (Regex("^\\(.\\) You caught: \\[.+].*").matches(message.string)) {
-                    messageBuffer.addLast(message.copy())
+                    caughtMessage = message.copy()
                     return@register false
                 } else if (Regex("^\\s*. (Triggered|Special): .+").matches(message.string)) {
                     if (Config.CompactFishing.showIcons) {
-                        if (messageBuffer.size == 1) {
-                            // Add space before first perk icon
-                            messageBuffer.addLast(Component.literal(" "))
-                        }
                         message
                             .siblings.first() // e.g. "[] Triggered: [] Supply Preserve"
                             .siblings.last()  // e.g. "Triggered: [] Supply Preserve"
-                            .siblings.first() // e.g. Supply preserve icon
+                            .siblings         // e.g. "[]", " ", "Supply Preserve"
                             .let {
-                                messageBuffer.addLast(it.copy().apply { style = message.siblings.first().style })
+                                iconBuffer.addLast(Pair(
+                                    it.first().copy().apply { style = message.siblings.first().style },
+                                    altIconOrder(it.last().string)
+                                ))
                             }
                     }
                     return@register false
@@ -62,8 +86,7 @@ object CompactFishing {
                             .siblings.last()  // "You earned: n Island XP"
                             .siblings.last()  // "n Island XP"
                             .let {
-                                messageBuffer.addLast(Component.literal(" +").apply { style = it.style })
-                                messageBuffer.addLast(it.copy())
+                                xpMessage = it.copy()
                             }
                     }
                     flushMessageBuffer()
@@ -77,12 +100,30 @@ object CompactFishing {
 
     fun flushMessageBuffer() {
         flushingBuffer = true
-        Minecraft.getInstance().player?.displayClientMessage(
-            messageBuffer.fold(Component.empty(), MutableComponent::append),
-            false
-        )
-        flushingBuffer = false
 
-        messageBuffer.clear()
+        Minecraft.getInstance().player?.displayClientMessage(
+            caughtMessage!!.apply {
+                if (iconBuffer.isNotEmpty()) {
+                    append(Component.literal(" "))
+
+                    if (Config.CompactFishing.useAltIconOrder) {
+                        iconBuffer.sortedBy { it.second }
+                    } else {
+                        iconBuffer
+                    }.forEach { append(it.first) }
+                }
+
+                if (xpMessage != null) {
+                    append(Component.literal(" +"))
+                    append(xpMessage!!)
+                }
+            }, false
+        )
+
+        caughtMessage = null
+        iconBuffer.clear()
+        xpMessage = null
+
+        flushingBuffer = false
     }
 }

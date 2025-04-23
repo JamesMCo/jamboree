@@ -18,6 +18,8 @@
     "config.jamboree.compactfishing.enabled.description": "When enabled, Compact Fishing combines the multiple messages shown when catching a fish on MCC Island in to one message. Requires Noxesium.",
     "config.jamboree.compactfishing.showicons.name": "Show Icons",
     "config.jamboree.compactfishing.showicons.description": "When enabled, show the icons of all \"Triggered:\" and \"Special:\" chat messages associated with the catch.",
+    "config.jamboree.compactfishing.useAltIconOrder.name": "Use Alternative Icon Order",
+    "config.jamboree.compactfishing.useAltIconOrder.description": "When enabled, changes the order of icons to:\n- Elusive Catch\n- Magnets\n- Rods\n- Supply Preserve",
     "config.jamboree.compactfishing.showxp.name": "Show XP",
     "config.jamboree.compactfishing.showxp.description": "When enabled, show the amount of Island XP awarded for the catch.",
 

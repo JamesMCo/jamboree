@@ -58,6 +58,9 @@ class Config {
     var compactFishingShowIcons: Boolean = true
 
     @SerialEntry
+    var compactFishingUseAltIconOrder: Boolean = false
+
+    @SerialEntry
     var compactFishingShowXP: Boolean = true
 
     object ChatDing {
@@ -83,6 +86,9 @@ class Config {
 
         val showIcons: Boolean
             get() = handler.instance().compactFishingShowIcons
+
+        val useAltIconOrder: Boolean
+            get() = handler.instance().compactFishingUseAltIconOrder
 
         val showXP: Boolean
             get() = handler.instance().compactFishingShowXP
@@ -162,6 +168,12 @@ class Config {
                         name(Component.translatable("config.jamboree.compactfishing.showicons.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.compactfishing.showicons.description")))
                         binding(handler.instance()::compactFishingShowIcons, true)
+                        controller(tickBox())
+                    }
+                    options.register<Boolean>("useAltIconOrder") {
+                        name(Component.translatable("config.jamboree.compactfishing.useAltIconOrder.name"))
+                        description(OptionDescription.of(Component.translatable("config.jamboree.compactfishing.useAltIconOrder.description")))
+                        binding(handler.instance()::compactFishingUseAltIconOrder, false)
                         controller(tickBox())
                     }
                     options.register<Boolean>("showxp") {
