@@ -11,10 +11,10 @@ import dev.isxander.yacl3.dsl.enumDropdown
 import dev.isxander.yacl3.dsl.stringField
 import dev.isxander.yacl3.dsl.tickBox
 import net.fabricmc.loader.api.FabricLoader
-import net.minecraft.client.gui.screen.Screen
-import net.minecraft.sound.SoundEvent
-import net.minecraft.text.Text
-import net.minecraft.util.Identifier
+import net.minecraft.client.gui.screens.Screen
+import net.minecraft.sounds.SoundEvent
+import net.minecraft.network.chat.Component
+import net.minecraft.resources.ResourceLocation
 import uk.mrjamesco.jamboree.Jamboree.Companion.logger
 
 class Config {
@@ -58,7 +58,7 @@ class Config {
     companion object {
         val handler: ConfigClassHandler<Config> by lazy {
             ConfigClassHandler.createBuilder(Config::class.java)
-                .id(Identifier.of("jamboree", "config"))
+                .id(ResourceLocation.fromNamespaceAndPath("jamboree", "config"))
                 .serializer { config ->
                     GsonConfigSerializerBuilder.create(config)
                         .setPath(FabricLoader.getInstance().configDir.resolve("jamboree.json"))
@@ -73,31 +73,31 @@ class Config {
         }
 
         fun getScreen(parentScreen: Screen): Screen = YetAnotherConfigLib("jamboree") {
-            title(Text.translatable("config.jamboree"))
+            title(Component.translatable("config.jamboree"))
             save(handler::save)
 
             categories.register("jamboree") {
-                name(Text.translatable("config.jamboree"))
+                name(Component.translatable("config.jamboree"))
 
                 groups.register("chatding") {
-                    name(Text.translatable("config.jamboree.chatding"))
+                    name(Component.translatable("config.jamboree.chatding"))
 
                     options.register<Boolean>("enabled") {
-                        name(Text.translatable("config.jamboree.chatding.enabled.name"))
-                        description(OptionDescription.of(Text.translatable("config.jamboree.chatding.enabled.description")))
+                        name(Component.translatable("config.jamboree.chatding.enabled.name"))
+                        description(OptionDescription.of(Component.translatable("config.jamboree.chatding.enabled.description")))
                         binding(handler.instance()::chatDingEnabled, true)
                         controller(tickBox())
                     }
                     options.register<uk.mrjamesco.jamboree.ChatDing.NotificationSound>("sound") {
-                        name(Text.translatable("config.jamboree.chatding.sound.name"))
-                        description(OptionDescription.of(Text.translatable("config.jamboree.chatding.sound.description")))
+                        name(Component.translatable("config.jamboree.chatding.sound.name"))
+                        description(OptionDescription.of(Component.translatable("config.jamboree.chatding.sound.description")))
                         binding(handler.instance()::chatDingSound, uk.mrjamesco.jamboree.ChatDing.NotificationSound.Chime)
                         controller(enumDropdown<uk.mrjamesco.jamboree.ChatDing.NotificationSound>())
                     }
                 }
                 groups.register("chatdingfilters", ListOption.createBuilder<String>()
-                    .name(Text.translatable("config.jamboree.chatding.filters.name"))
-                    .description(OptionDescription.of(Text.translatable("config.jamboree.chatding.filters.description")))
+                    .name(Component.translatable("config.jamboree.chatding.filters.name"))
+                    .description(OptionDescription.of(Component.translatable("config.jamboree.chatding.filters.description")))
                     .binding(emptyList(), { handler.instance().chatDingFilters }, { value -> handler.instance().chatDingFilters = value })
                     .controller(stringField())
                     .initial("")

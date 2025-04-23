@@ -27,7 +27,7 @@ val transitiveInclude: Configuration by configurations.creating {
 
 dependencies {
     minecraft(libs.minecraft)
-    mappings("${libs.yarn.mappings.get()}:v2")
+    mappings(loom.officialMojangMappings())
     modImplementation(libs.fabric.loader)
 
     modImplementation(libs.fabric.kotlin)
