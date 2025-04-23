@@ -6,6 +6,10 @@
     "config.jamboree.chatding.enabled.description": "When enabled, Chat Ding plays a sound when one of the filter phrases is sent in chat.",
     "config.jamboree.chatding.sound.name": "Notification Sound",
     "config.jamboree.chatding.sound.description": "The sound that plays when one of the filter phrases is sent in chat.",
+    "config.jamboree.chatding.pitch.name": "Sound Pitch",
+    "config.jamboree.chatding.pitch.description": "The pitch of the sound that plays when one of the filter phrases is sent in chat.",
+    "config.jamboree.chatding.volume.name": "Sound Volume",
+    "config.jamboree.chatding.volume.description": "The volume of the sound that plays when one of the filter phrases is sent in chat.",
     "config.jamboree.chatding.filters.name": "Chat Ding Filters",
     "config.jamboree.chatding.filters.description": "The list of phrases that should cause a sound to play when sent in chat.\n\nIf a phrase in the list is included within a longer phrase, only the shorter phrase will be kept.",
 

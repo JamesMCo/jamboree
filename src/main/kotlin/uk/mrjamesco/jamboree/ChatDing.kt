@@ -71,7 +71,7 @@ object ChatDing {
             for (candidate: String in Config.ChatDing.filters) {
                 if (candidate in lowercase) {
                     logger.info("Found \"$candidate\" in $messageType message")
-                    Minecraft.getInstance().player?.playSound(Config.ChatDing.sound, 1.0f, 1.0f)
+                    Minecraft.getInstance().player?.playSound(Config.ChatDing.sound, Config.ChatDing.volume, Config.ChatDing.pitch)
                 }
             }
         }
