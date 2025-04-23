@@ -1,6 +1,6 @@
 package uk.mrjamesco.jamboree
 
-import com.noxcrew.noxesium.NoxesiumFabricMod
+import com.noxcrew.noxesium.NoxesiumMod
 import com.noxcrew.noxesium.network.NoxesiumPackets
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents
@@ -29,7 +29,6 @@ object CompactFishing {
         ClientPlayConnectionEvents.JOIN.register { handler, _, _ -> onMCCIsland = Regex("mccisland\\.(net|com)").containsMatchIn(handler.connection.remoteAddress.toString()) }
 
         // Detect being in a fishing server
-        NoxesiumFabricMod.initialize()
         NoxesiumPackets.CLIENT_MCC_SERVER.addListener(this) { _, packet, _ -> onFishingIsland = (packet.serverType == "lobby" && Regex("^(temperate|tropical|barren)_.+").matches(packet.subType)) }
 
         // Detect fishing messages
