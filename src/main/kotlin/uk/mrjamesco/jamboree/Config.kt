@@ -143,7 +143,7 @@ class Config {
                         name(Component.translatable("config.jamboree.chatding.volume.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.chatding.volume.description")))
                         binding(handler.instance()::chatDingVolume, 100)
-                        controller(slider(0..100, 1))
+                        controller(slider(0..100, 1) { Component.literal("$it%") })
                     }
                 }
                 groups.register("chatdingfilters", ListOption.createBuilder<String>()
