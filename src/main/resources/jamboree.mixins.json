@@ -1,0 +1,8 @@
+{
+    "package": "uk.mrjamesco.jamboree.mixins",
+    "mixins": [],
+    "client": [
+      "ChatComponentMixin"
+    ],
+    "server": []
+}
