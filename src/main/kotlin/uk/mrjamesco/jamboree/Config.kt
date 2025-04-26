@@ -63,6 +63,9 @@ class Config {
     @SerialEntry
     var compactFishingShowXP: Boolean = true
 
+    @SerialEntry
+    var compactFishingCollect: Boolean = true
+
     object ChatDing {
         val enabled: Boolean
             get() = handler.instance().chatDingEnabled
@@ -92,6 +95,9 @@ class Config {
 
         val showXP: Boolean
             get() = handler.instance().compactFishingShowXP
+
+        val collect: Boolean
+            get() = handler.instance().compactFishingCollect
     }
 
     companion object {
@@ -180,6 +186,12 @@ class Config {
                         name(Component.translatable("config.jamboree.compactfishing.showxp.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.compactfishing.showxp.description")))
                         binding(handler.instance()::compactFishingShowXP, true)
+                        controller(tickBox())
+                    }
+                    options.register<Boolean>("collect") {
+                        name(Component.translatable("config.jamboree.compactfishing.collect.name"))
+                        description(OptionDescription.of(Component.translatable("config.jamboree.compactfishing.collect.description")))
+                        binding(handler.instance()::compactFishingCollect, true)
                         controller(tickBox())
                     }
                 }

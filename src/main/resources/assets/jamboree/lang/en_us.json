@@ -22,6 +22,8 @@
     "config.jamboree.compactfishing.useAltIconOrder.description": "When enabled, changes the order of icons to:\n- Elusive Catch\n- Magnets\n- Rods\n- Supply Preserve",
     "config.jamboree.compactfishing.showxp.name": "Show XP",
     "config.jamboree.compactfishing.showxp.description": "When enabled, show the amount of Island XP awarded for the catch.",
+    "config.jamboree.compactfishing.collect.name": "Collect Before Showing Message",
+    "config.jamboree.compactfishing.collect.description": "When enabled, wait until all messages related to a catch have been received before showing the combined message.\n\nWhen disabled, show the initial \"You caught:\" message immediately, then update it with icons and XP as they are received.\nNOTE: In this mode, your game logs will not show the icons or XP, only the caught fish.",
 
     "modmenu.nameTranslation.jamboree": "Jamboree",
     "modmenu.descriptionTranslation.jamboree": "Miscellaneous utility stuff",

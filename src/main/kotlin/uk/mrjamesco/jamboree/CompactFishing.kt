@@ -5,10 +5,12 @@ import com.noxcrew.noxesium.network.NoxesiumPackets
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents
 import net.fabricmc.loader.api.FabricLoader
+import net.minecraft.client.GuiMessage
 import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
 import uk.mrjamesco.jamboree.Jamboree.Companion.logger
+import uk.mrjamesco.jamboree.mixins.ChatComponentMixin
 
 object CompactFishing {
     fun altIconOrder(iconText: String): Int = when (iconText) {
@@ -40,7 +42,11 @@ object CompactFishing {
     private var caughtMessage: MutableComponent? = null
     private val iconBuffer: MutableList<Pair<MutableComponent, Int>> = mutableListOf()
     private var xpMessage: MutableComponent? = null
-    private var flushingBuffer: Boolean = false
+    private var sendingCompactMessage: Boolean = false
+
+    private fun Component.isCaughtMessage(): Boolean = Regex("^\\(.\\) You caught: \\[.+].*").matches(this.string)
+    private fun Component.isIconMessage(): Boolean   = Regex("^\\s*. (Triggered|Special): .+").matches(this.string)
+    private fun Component.isXPMessage(): Boolean     = Regex("^\\s*. You earned: .+").matches(this.string)
 
     fun registerListeners() {
         if (!FabricLoader.getInstance().isModLoaded("noxesium")) {
@@ -57,16 +63,24 @@ object CompactFishing {
         NoxesiumPackets.CLIENT_MCC_SERVER.addListener(this) { _, packet, _ -> onFishingIsland = (packet.serverType == "lobby" && Regex("^(temperate|tropical|barren)_.+").matches(packet.subType)) }
 
         // Detect fishing messages
-        ClientReceiveMessageEvents.ALLOW_GAME.register { message, _ ->
-            if (flushingBuffer) {
-                return@register true
+        ClientReceiveMessageEvents.ALLOW_GAME.register allowMessage@{ message, _ ->
+            if (sendingCompactMessage) {
+                return@allowMessage true
             }
 
             if (Config.CompactFishing.enabled && onMCCIsland && onFishingIsland) {
-                if (Regex("^\\(.\\) You caught: \\[.+].*").matches(message.string)) {
+                if (message.isCaughtMessage()) {
                     caughtMessage = message.copy()
-                    return@register false
-                } else if (Regex("^\\s*. (Triggered|Special): .+").matches(message.string)) {
+
+                    // Seeing a new caught message means we are handling a new set of messages
+                    // Therefore, we need to clear the icons and xp message
+                    iconBuffer.clear()
+                    xpMessage = null
+
+                    // If collecting messages, then need to block the message
+                    // Otherwise, need to let the message through
+                    return@allowMessage !Config.CompactFishing.collect
+                } else if (message.isIconMessage()) {
                     if (Config.CompactFishing.showIcons) {
                         message
                             .siblings.first() // e.g. "[] Triggered: [] Supply Preserve"
@@ -78,9 +92,14 @@ object CompactFishing {
                                     altIconOrder(it.last().string)
                                 ))
                             }
+
+                        if (!Config.CompactFishing.collect) {
+                            // If not collecting messages, then we need to update chat now to show the new icon
+                            updateChat()
+                        }
                     }
-                    return@register false
-                } else if (Regex("^\\s*. You earned: .+").matches(message.string)) {
+                    return@allowMessage false
+                } else if (message.isXPMessage()) {
                     if (Config.CompactFishing.showXP) {
                         message
                             .siblings.last()  // "You earned: n Island XP"
@@ -88,42 +107,65 @@ object CompactFishing {
                             .let {
                                 xpMessage = it.copy()
                             }
+                        // If showing xp, then we need to update chat (whether collecting or not)
+                        updateChat()
+                    } else if (Config.CompactFishing.collect) {
+                        // If not showing xp, then we only need to update chat if collecting messages
+                        // (as icons will already be present in the chat log)
+                        updateChat()
                     }
-                    flushMessageBuffer()
-                    return@register false
+                    return@allowMessage false
                 }
             }
 
-            return@register true
+            // This isn't a message relating to catching a fish
+            return@allowMessage true
         }
     }
 
-    fun flushMessageBuffer() {
-        flushingBuffer = true
+    fun buildCompactMessage(): Component = caughtMessage?.copy()?.apply {
+        if (iconBuffer.isNotEmpty()) {
+            append(Component.literal(" "))
 
-        Minecraft.getInstance().player?.displayClientMessage(
-            caughtMessage!!.apply {
-                if (iconBuffer.isNotEmpty()) {
-                    append(Component.literal(" "))
+            if (Config.CompactFishing.useAltIconOrder) {
+                iconBuffer.sortedBy { it.second }
+            } else {
+                iconBuffer
+            }.forEach { append(it.first) }
+        }
 
-                    if (Config.CompactFishing.useAltIconOrder) {
-                        iconBuffer.sortedBy { it.second }
-                    } else {
-                        iconBuffer
-                    }.forEach { append(it.first) }
+        if (xpMessage != null) {
+            append(Component.literal(" +"))
+            append(xpMessage!!)
+        }
+    } ?: Component.empty()
+
+    fun updateChat() {
+        if (Config.CompactFishing.collect) {
+            // Update chat by sending a new message
+            sendingCompactMessage = true
+            Minecraft.getInstance().player?.displayClientMessage(buildCompactMessage(), false)
+            sendingCompactMessage = false
+        } else {
+            // Update chat by replacing an existing message
+
+            // Only need to toggle sendingCompactMessage when sending a new message
+            // (replacing an existing message doesn't trigger ClientReceiveMessageEvents.ALLOW_GAME)
+            (Minecraft.getInstance().gui.chat as ChatComponentMixin).apply replaceExistingCatchMessage@{
+                allMessages.forEachIndexed { i, message ->
+                    if (message.content.isCaughtMessage()) {
+                        // Compact messages start with caught messages, so will match the same regex
+                        allMessages[i] = GuiMessage(
+                            message.addedTime,
+                            buildCompactMessage(),
+                            message.signature,
+                            message.tag
+                        )
+                        refreshTrimmedMessages()
+                        return@replaceExistingCatchMessage
+                    }
                 }
-
-                if (xpMessage != null) {
-                    append(Component.literal(" +"))
-                    append(xpMessage!!)
-                }
-            }, false
-        )
-
-        caughtMessage = null
-        iconBuffer.clear()
-        xpMessage = null
-
-        flushingBuffer = false
+            }
+        }
     }
 }
