@@ -2,31 +2,57 @@ name: Create Release
 
 on:
   push:
-    tags: [ "v[0-9]+.[0-9]+.[0-9]+" ]
+    tags: [ "v[0-9]+.[0-9]+.[0-9]+" ] # This triggers on tags, but the matrix means that it doesn't checkout the tag
   workflow_dispatch:
 jobs:
-  create-release:
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    strategy:
+      matrix:
+        include:
+          - branch: "main"
+            version: "1.21.4"
+          - branch: "1.21.1"
+            version: "1.21.1"
 
     steps:
       - name: "📂 Check-Out Repository"
         uses: actions/checkout@v4
-      - name: "☕ Validate Gradle Wrapper"
-        uses: gradle/actions/wrapper-validation@v4
+        with:
+          ref: ${{ matrix.branch }}
       - name: "☕ Set Up JDK"
         uses: actions/setup-java@v4
         with:
           java-version: "21"
           distribution: "temurin"
           cache: "gradle"
+      - name: "☕ Set Up Gradle"
+        uses: gradle/actions/setup-gradle@v4
       - name: "☕ Make Gradle Wrapper Executable"
         run: chmod +x ./gradlew
       - name: "🔨 Build with Gradle"
         run: ./gradlew build
+      - name: "⏫ Upload Jar Artefact"
+        uses: actions/upload-artifact
+        with:
+          name: "jar-${{ matrix.version }}"
+          path: "build/libs/jamboree-*.jar"
+
+  create-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs: build
+
+    steps:
+      - name: "⏬ Download Jar Artefacts"
+        uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
       - name: "🎉 Publish Release to Repository"
         uses: softprops/action-gh-release@v2
         with:
           draft: true
-          files: "build/libs/jamboree-*.jar"
+          files: "jamboree-*.jar"
