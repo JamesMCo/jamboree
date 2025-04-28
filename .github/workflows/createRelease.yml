@@ -56,3 +56,8 @@ jobs:
         with:
           draft: true
           files: "jamboree-*.jar"
+      - name: "🧼 Delete Artefacts"
+        uses: geekyeggo/delete-artifact@v5
+        with:
+          name: "jar-*"
+          failOnError: false
