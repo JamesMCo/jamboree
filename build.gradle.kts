@@ -78,7 +78,7 @@ tasks {
     }
 
     remapJar {
-        archiveFileName = "jamboree-${version}.jar"
+        archiveFileName = "jamboree-${version}+${libs.versions.minecraft.get()}.jar"
     }
 
     publishing {
