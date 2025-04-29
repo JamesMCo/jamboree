@@ -17,6 +17,8 @@ import net.minecraft.sounds.SoundEvent
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import uk.mrjamesco.jamboree.Jamboree.Companion.logger
+import uk.mrjamesco.jamboree.compactfishing.FishingMessageHandler
+import uk.mrjamesco.jamboree.compactfishing.FishingMessageHandlers
 
 class Config {
     @SerialEntry
@@ -64,7 +66,7 @@ class Config {
     var compactFishingShowXP: Boolean = true
 
     @SerialEntry
-    var compactFishingCollect: Boolean = true
+    var compactFishingMode: FishingMessageHandlers = FishingMessageHandlers.DelayedOneLine
 
     object ChatDing {
         val enabled: Boolean
@@ -96,8 +98,8 @@ class Config {
         val showXP: Boolean
             get() = handler.instance().compactFishingShowXP
 
-        val collect: Boolean
-            get() = handler.instance().compactFishingCollect
+        val mode: FishingMessageHandler
+            get() = handler.instance().compactFishingMode.get()
     }
 
     companion object {
@@ -170,6 +172,12 @@ class Config {
                         binding(handler.instance()::compactFishingEnabled, false)
                         controller(tickBox())
                     }
+                    options.register<FishingMessageHandlers>("mode") {
+                        name(Component.translatable("config.jamboree.compactfishing.mode.name"))
+                        description(OptionDescription.of(FishingMessageHandlers.buildConfigDescription()))
+                        binding(handler.instance()::compactFishingMode, FishingMessageHandlers.DelayedOneLine)
+                        controller(enumDropdown<FishingMessageHandlers>())
+                    }
                     options.register<Boolean>("showicons") {
                         name(Component.translatable("config.jamboree.compactfishing.showicons.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.compactfishing.showicons.description")))
@@ -186,12 +194,6 @@ class Config {
                         name(Component.translatable("config.jamboree.compactfishing.showxp.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.compactfishing.showxp.description")))
                         binding(handler.instance()::compactFishingShowXP, true)
-                        controller(tickBox())
-                    }
-                    options.register<Boolean>("collect") {
-                        name(Component.translatable("config.jamboree.compactfishing.collect.name"))
-                        description(OptionDescription.of(Component.translatable("config.jamboree.compactfishing.collect.description")))
-                        binding(handler.instance()::compactFishingCollect, true)
                         controller(tickBox())
                     }
                 }
