@@ -1,6 +1,5 @@
-package uk.mrjamesco.jamboree
+package uk.mrjamesco.jamboree.compactfishing
 
-import com.noxcrew.noxesium.NoxesiumMod
 import com.noxcrew.noxesium.network.NoxesiumPackets
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents
@@ -9,6 +8,7 @@ import net.minecraft.client.GuiMessage
 import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
+import uk.mrjamesco.jamboree.Config
 import uk.mrjamesco.jamboree.Jamboree.Companion.logger
 import uk.mrjamesco.jamboree.mixins.ChatComponentMixin
 
