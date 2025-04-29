@@ -17,6 +17,11 @@ enum class FishingMessageHandlers : NameableEnum {
         override fun getDisplayName(): Component = Component.translatable("config.jamboree.compactfishing.mode.delayedoneline.name")
         override fun getDescription(): Component = Component.translatable("config.jamboree.compactfishing.mode.delayedoneline.description")
     },
+    DelayedTwoLines {
+        override fun get() = DelayedTwoLinesFishingMessageHandler
+        override fun getDisplayName(): Component = Component.translatable("config.jamboree.compactfishing.mode.delayedtwolines.name")
+        override fun getDescription(): Component = Component.translatable("config.jamboree.compactfishing.mode.delayedtwolines.description")
+    },
     Replacing {
         override fun get() = ReplacingFishingMessageHandler
         override fun getDisplayName(): Component = Component.translatable("config.jamboree.compactfishing.mode.replacing.name")

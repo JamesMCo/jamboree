@@ -19,6 +19,8 @@
     "config.jamboree.compactfishing.mode.description": "The way in which fishing messages will be shown in chat.",
     "config.jamboree.compactfishing.mode.delayedoneline.name": "Delayed (One Line)",
     "config.jamboree.compactfishing.mode.delayedoneline.description": "Wait until all messages related to a catch have been received before showing the combined message.",
+    "config.jamboree.compactfishing.mode.delayedtwolines.name": "Delayed (Two Lines)",
+    "config.jamboree.compactfishing.mode.delayedtwolines.description": "Show the initial \"You caught:\" message immediately, then show a separate message with icons and XP once all messages related to a catch have been received.",
     "config.jamboree.compactfishing.mode.replacing.name": "Animated",
     "config.jamboree.compactfishing.mode.replacing.description": "Show the initial \"You caught:\" message immediately, then update it with icons and XP as they are received.",
     "config.jamboree.compactfishing.mode.replacing.description.note.header": "ℹ NOTE",
