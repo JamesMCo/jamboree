@@ -62,15 +62,14 @@ object ChatDing {
 
     fun registerListeners() {
         logger.info("Registering ChatDing listeners")
-        ClientReceiveMessageEvents.CHAT.register { message, _, _, _, _ -> if (Config.ChatDing.enabled) testMessage(message.string, "CHAT") }
-        ClientReceiveMessageEvents.GAME.register { message, _ -> if (Config.ChatDing.enabled) testMessage(message.string, "GAME") }
+        ClientReceiveMessageEvents.CHAT.register { message, _, _, _, _ -> if (Config.ChatDing.enabled) testMessage(message.string) }
+        ClientReceiveMessageEvents.GAME.register { message, _ -> if (Config.ChatDing.enabled) testMessage(message.string) }
     }
 
-    fun testMessage(message: String, messageType: String) {
+    fun testMessage(message: String) {
         message.lowercase().let { lowercase ->
             for (candidate: String in Config.ChatDing.filters) {
                 if (candidate in lowercase) {
-                    logger.info("Found \"$candidate\" in $messageType message")
                     Minecraft.getInstance().player?.playSound(Config.ChatDing.sound, Config.ChatDing.volume, Config.ChatDing.pitch)
                     return
                 }
