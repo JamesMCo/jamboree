@@ -49,5 +49,12 @@
         }
     ],
     "license": "MIT",
-    "icon": "assets/jamboree/icon.png"
+    "icon": "assets/jamboree/icon.png",
+    "custom": {
+        "modmenu": {
+            "links": {
+                "modmenu.issues": "https://github.com/JamesMCo/jamboree/issues"
+            }
+        }
+    }
 }
