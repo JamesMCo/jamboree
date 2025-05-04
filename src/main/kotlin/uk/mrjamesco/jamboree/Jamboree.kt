@@ -12,6 +12,7 @@ class Jamboree: ModInitializer {
         Config.init()
         ChatDing.registerListeners()
         CompactFishing.registerListeners()
+        HideBlockOutlines.registerListeners()
     }
 
     companion object {

@@ -12,9 +12,11 @@ import dev.isxander.yacl3.dsl.slider
 import dev.isxander.yacl3.dsl.stringField
 import dev.isxander.yacl3.dsl.tickBox
 import net.fabricmc.loader.api.FabricLoader
+import net.minecraft.ChatFormatting
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.Style
 import net.minecraft.resources.ResourceLocation
 import uk.mrjamesco.jamboree.Jamboree.Companion.logger
 import uk.mrjamesco.jamboree.compactfishing.FishingMessageHandler
@@ -68,6 +70,9 @@ class Config {
     @SerialEntry
     var compactFishingMode: FishingMessageHandlers = FishingMessageHandlers.DelayedOneLine
 
+    @SerialEntry
+    var hideBlockOutlinesEnabled: Boolean = false
+
     object ChatDing {
         val enabled: Boolean
             get() = handler.instance().chatDingEnabled
@@ -100,6 +105,11 @@ class Config {
 
         val mode: FishingMessageHandler
             get() = handler.instance().compactFishingMode.get()
+    }
+
+    object HideBlockOutlines {
+        val enabled: Boolean
+            get() = handler.instance().hideBlockOutlinesEnabled
     }
 
     companion object {
@@ -194,6 +204,22 @@ class Config {
                         name(Component.translatable("config.jamboree.compactfishing.showxp.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.compactfishing.showxp.description")))
                         binding(handler.instance()::compactFishingShowXP, true)
+                        controller(tickBox())
+                    }
+                }
+
+                groups.register("hideblockoutlines") {
+                    name(Component.translatable("config.jamboree.hideblockoutlines"))
+
+                    options.register<Boolean>("enabled") {
+                        name(Component.translatable("config.jamboree.hideblockoutlines.enabled.name"))
+                        description(OptionDescription.of(Component.translatable("config.jamboree.hideblockoutlines.enabled.description").apply {
+                            append(Component.literal("\n"))
+                            append(Component.translatable("config.jamboree.hideblockoutlines.enabled.description.note.header").apply { style = Style.EMPTY.withColor(ChatFormatting.AQUA) })
+                            append(Component.literal("\n"))
+                            append(Component.translatable("config.jamboree.hideblockoutlines.enabled.description.note.body"))
+                        }))
+                        binding(handler.instance()::hideBlockOutlinesEnabled, false)
                         controller(tickBox())
                     }
                 }
