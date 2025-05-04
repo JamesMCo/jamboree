@@ -35,6 +35,12 @@
     "config.jamboree.compactfishing.showxp.name": "Show XP",
     "config.jamboree.compactfishing.showxp.description": "When enabled, show the amount of Island XP awarded for the catch.",
 
+    "config.jamboree.hideblockoutlines": "Hide Block Outlines",
+    "config.jamboree.hideblockoutlines.enabled.name": "Enabled",
+    "config.jamboree.hideblockoutlines.enabled.description": "When enabled, hides the outlines drawn around blocks pointed at by the crosshair.",
+    "config.jamboree.hideblockoutlines.enabled.description.note.header": "ℹ NOTE",
+    "config.jamboree.hideblockoutlines.enabled.description.note.body": "This only has an effect when you are in Creative Mode.",
+
     "modmenu.nameTranslation.jamboree": "Jamboree",
     "modmenu.descriptionTranslation.jamboree": "Miscellaneous utility stuff",
     "modmenu.summaryTranslation.jamboree": "Miscellaneous utility stuff"
