@@ -73,6 +73,9 @@ class Config {
     @SerialEntry
     var hideBlockOutlinesEnabled: Boolean = false
 
+    @SerialEntry
+    var islandGameStartNotifyEnabled: Boolean = false
+
     object ChatDing {
         val enabled: Boolean
             get() = handler.instance().chatDingEnabled
@@ -110,6 +113,11 @@ class Config {
     object HideBlockOutlines {
         val enabled: Boolean
             get() = handler.instance().hideBlockOutlinesEnabled
+    }
+
+    object IslandGameStartNotify {
+        val enabled: Boolean
+            get() = handler.instance().islandGameStartNotifyEnabled
     }
 
     companion object {
@@ -220,6 +228,17 @@ class Config {
                             append(Component.translatable("config.jamboree.hideblockoutlines.enabled.description.note.body"))
                         }))
                         binding(handler.instance()::hideBlockOutlinesEnabled, false)
+                        controller(tickBox())
+                    }
+                }
+
+                groups.register("islandgamestartnotify") {
+                    name(Component.translatable("config.jamboree.islandgamestartnotify"))
+
+                    options.register<Boolean>("enabled") {
+                        name(Component.translatable("config.jamboree.islandgamestartnotify.enabled.name"))
+                        description(OptionDescription.of(Component.translatable("config.jamboree.islandgamestartnotify.enabled.description")))
+                        binding(handler.instance()::islandGameStartNotifyEnabled, false)
                         controller(tickBox())
                     }
                 }
