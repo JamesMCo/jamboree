@@ -15,6 +15,7 @@
 
     "config.jamboree.compactfishing": "Compact Fishing",
     "config.jamboree.compactfishing.enabled.name": "Enabled",
+    "config.jamboree.compactfishing.enabled.description": "When enabled, Compact Fishing combines the multiple messages shown when catching a fish on MCC Island in to one message. Requires Noxesium.",
     "config.jamboree.compactfishing.mode.name": "Message Mode",
     "config.jamboree.compactfishing.mode.description": "The way in which fishing messages will be shown in chat.",
     "config.jamboree.compactfishing.mode.delayedoneline.name": "Delayed (One Line)",
@@ -27,7 +28,6 @@
     "config.jamboree.compactfishing.mode.replacing.description.note.body": "In this mode, your game logs will not show the icons or XP, only the caught fish.",
     "config.jamboree.compactfishing.mode.replacing.description.warning.header": "⚠ WARNING",
     "config.jamboree.compactfishing.mode.replacing.description.warning.body": "This mode might not function as expected if you have another mod installed that changes how chat is handled or rendered.",
-    "config.jamboree.compactfishing.enabled.description": "When enabled, Compact Fishing combines the multiple messages shown when catching a fish on MCC Island in to one message. Requires Noxesium.",
     "config.jamboree.compactfishing.showicons.name": "Show Icons",
     "config.jamboree.compactfishing.showicons.description": "When enabled, show the icons of all \"Triggered:\" and \"Special:\" chat messages associated with the catch.",
     "config.jamboree.compactfishing.useAltIconOrder.name": "Use Alternative Icon Order",
