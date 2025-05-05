@@ -12,3 +12,5 @@ _(Some features require [Noxesium](https://modrinth.com/noxesium) - see below)_
 - Chat Ding: play a sound when certain phrases or words appear in messages in chat
 - Compact Fishing: combine multiple messages shown when catching a fish on MCC Island in to one message (requires Noxesium)
 - Hide Block Outlines: hide block outlines when the player is in creative mode (useful for recording from an external perspective in creative mode when you don't want to be able to see block outlines, but do want to be able to see the rest of the UI)
+- Island Game Start Notify: cause the window icon to flash when tabbed out while joining a game server on MCC Island, such as when a game queue has filled (requires Noxesium)
+- 

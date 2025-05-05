@@ -14,6 +14,7 @@ class Jamboree: ModInitializer {
         ChatDing.registerListeners()
         CompactFishing.registerListeners()
         HideBlockOutlines.registerListeners()
+        IslandGameStartNotify.registerListeners()
     }
 
     companion object {

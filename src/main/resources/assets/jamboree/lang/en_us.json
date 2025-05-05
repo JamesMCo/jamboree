@@ -41,6 +41,10 @@
     "config.jamboree.hideblockoutlines.enabled.description.note.header": "ℹ NOTE",
     "config.jamboree.hideblockoutlines.enabled.description.note.body": "This only has an effect when you are in Creative Mode.",
 
+    "config.jamboree.islandgamestartnotify": "Island Game Start Notify",
+    "config.jamboree.islandgamestartnotify.enabled.name": "Enabled",
+    "config.jamboree.islandgamestartnotify.enabled.description": "When enabled, causes the window icon to flash when tabbed out while joining a game server on MCC Island, such as when a game queue has filled. Requires Noxesium.",
+
     "modmenu.nameTranslation.jamboree": "Jamboree",
     "modmenu.descriptionTranslation.jamboree": "Miscellaneous utility stuff",
     "modmenu.summaryTranslation.jamboree": "Miscellaneous utility stuff"
