@@ -8,6 +8,7 @@ import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.network.chat.Component
 import uk.mrjamesco.jamboree.Config
 import uk.mrjamesco.jamboree.Jamboree.Companion.logger
+import uk.mrjamesco.jamboree.Util.onMCCIsland
 
 object CompactFishing {
     fun altIconOrder(iconText: String): Int = when (iconText) {
@@ -33,7 +34,6 @@ object CompactFishing {
         else -> Int.MAX_VALUE
     }
 
-    private var onMCCIsland: Boolean = false
     private var onFishingIsland: Boolean = false
 
     internal fun Component.isCaughtMessage(): Boolean = Regex("^\\(.\\) You caught: \\[.+].*").matches(this.string)
@@ -47,9 +47,6 @@ object CompactFishing {
         }
 
         logger.info("Registering CompactFishing listeners")
-
-        // Detect joining MCC Island
-        ClientPlayConnectionEvents.JOIN.register { handler, _, _ -> onMCCIsland = Regex("mccisland\\.(net|com)").containsMatchIn(handler.connection.remoteAddress.toString()) }
 
         // Detect being in a fishing server
         NoxesiumFabricMod.initialize()

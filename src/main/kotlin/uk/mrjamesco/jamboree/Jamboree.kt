@@ -10,6 +10,7 @@ class Jamboree: ModInitializer {
     override fun onInitialize() {
         logger.info("Initialising Jamboree v${FabricLoader.getInstance().getModContainer("jamboree").get().metadata.version}")
         Config.init()
+        Util.registerListeners()
         ChatDing.registerListeners()
         CompactFishing.registerListeners()
         HideBlockOutlines.registerListeners()
