@@ -36,6 +36,9 @@ class Config {
     var chatDingVolume: Int = 100
 
     @SerialEntry
+    var chatDingFlash: Boolean = false
+
+    @SerialEntry
     var chatDingFilters: List<String> = emptyList()
         set(value) {
             val lowercase: List<String> = value.map(String::lowercase)
@@ -88,6 +91,9 @@ class Config {
 
         val volume: Float
             get() = handler.instance().chatDingVolume.coerceIn(0..100) / 100.0f
+
+        val flash: Boolean
+            get() = handler.instance().chatDingFlash
 
         val filters: List<String>
             get() = handler.instance().chatDingFilters
@@ -170,6 +176,12 @@ class Config {
                         description(OptionDescription.of(Component.translatable("config.jamboree.chatding.volume.description")))
                         binding(handler.instance()::chatDingVolume, 100)
                         controller(slider(0..100, 1) { Component.literal("$it%") })
+                    }
+                    options.register<Boolean>("flash") {
+                        name(Component.translatable("config.jamboree.chatding.flash.name"))
+                        description(OptionDescription.of(Component.translatable("config.jamboree.chatding.flash.description")))
+                        binding(handler.instance()::chatDingFlash, false)
+                        controller(tickBox())
                     }
                 }
                 groups.register("chatdingfilters", ListOption.createBuilder<String>()

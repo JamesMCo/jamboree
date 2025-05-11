@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import uk.mrjamesco.jamboree.Jamboree.Companion.logger
+import uk.mrjamesco.jamboree.Util.requestAttentionIfNotActive
 
 object ChatDing {
     enum class NotificationSound {
@@ -71,6 +72,9 @@ object ChatDing {
             for (candidate: String in Config.ChatDing.filters) {
                 if (candidate in lowercase) {
                     Minecraft.getInstance().player?.playSound(Config.ChatDing.sound, Config.ChatDing.volume, Config.ChatDing.pitch)
+                    if (Config.ChatDing.flash) {
+                        Minecraft.getInstance().window.requestAttentionIfNotActive()
+                    }
                     return
                 }
             }
