@@ -41,7 +41,8 @@ jobs:
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           modrinth-featured: false # Do not set featured ourselves, instead use Modrinth "auto-feature"
 
-          files: [ "jamboree-${{ steps.version_name.outputs.version_name }}.jar" ]
+          files: |
+            "jamboree-${{ steps.version_name.outputs.version_name }}.jar"
           name: ${{ steps.version_name.outputs.version_name }}"
           version: ${{ steps.version_name.outputs.version_name }}"
           version-type: "release"
