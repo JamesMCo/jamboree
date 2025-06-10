@@ -21,6 +21,8 @@ import net.minecraft.resources.ResourceLocation
 import uk.mrjamesco.jamboree.Jamboree.Companion.logger
 import uk.mrjamesco.jamboree.compactfishing.FishingMessageHandler
 import uk.mrjamesco.jamboree.compactfishing.FishingMessageHandlers
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.milliseconds
 
 class Config {
     @SerialEntry
@@ -34,6 +36,9 @@ class Config {
 
     @SerialEntry
     var chatDingVolume: Int = 100
+
+    @SerialEntry
+    var chatDingCooldown: Int = 0
 
     @SerialEntry
     var chatDingFlash: Boolean = false
@@ -92,6 +97,9 @@ class Config {
         val volume: Float
             get() = handler.instance().chatDingVolume.coerceIn(0..100) / 100.0f
 
+        val cooldown: Duration
+            get() = handler.instance().chatDingCooldown.coerceAtLeast(0).milliseconds
+        
         val flash: Boolean
             get() = handler.instance().chatDingFlash
 
@@ -176,6 +184,12 @@ class Config {
                         description(OptionDescription.of(Component.translatable("config.jamboree.chatding.volume.description")))
                         binding(handler.instance()::chatDingVolume, 100)
                         controller(slider(0..100, 1) { Component.literal("$it%") })
+                    }
+                    options.register<Int>("cooldown") {
+                        name(Component.translatable("config.jamboree.chatding.cooldown.name"))
+                        description(OptionDescription.of(Component.translatable("config.jamboree.chatding.cooldown.description")))
+                        binding(handler.instance()::chatDingCooldown, 0)
+                        controller(slider(0..10_000, 100) { Component.literal("${it / 1000.0} second${if (it == 1000) "" else "s"}") })
                     }
                     options.register<Boolean>("flash") {
                         name(Component.translatable("config.jamboree.chatding.flash.name"))
