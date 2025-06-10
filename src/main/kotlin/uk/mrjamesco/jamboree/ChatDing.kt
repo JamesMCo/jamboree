@@ -1,5 +1,7 @@
 package uk.mrjamesco.jamboree
 
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents
 import net.minecraft.client.Minecraft
 import net.minecraft.sounds.SoundEvent
@@ -61,6 +63,8 @@ object ChatDing {
         abstract val sound: SoundEvent
     }
 
+    private var latestTrigger: Instant = Instant.DISTANT_PAST
+
     fun registerListeners() {
         logger.info("Registering ChatDing listeners")
         ClientReceiveMessageEvents.CHAT.register { message, _, _, _, _ -> if (Config.ChatDing.enabled) testMessage(message.string) }
@@ -68,10 +72,15 @@ object ChatDing {
     }
 
     fun testMessage(message: String) {
+        if (Clock.System.now() - latestTrigger < Config.ChatDing.cooldown) {
+            return
+        }
+
         message.lowercase().let { lowercase ->
             for (candidate: String in Config.ChatDing.filters) {
                 if (candidate in lowercase) {
                     Minecraft.getInstance().player?.playSound(Config.ChatDing.sound, Config.ChatDing.volume, Config.ChatDing.pitch)
+                    latestTrigger = Clock.System.now()
                     if (Config.ChatDing.flash) {
                         Minecraft.getInstance().window.requestAttentionIfNotActive()
                     }
