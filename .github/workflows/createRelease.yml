@@ -12,10 +12,10 @@ jobs:
     strategy:
       matrix:
         include:
-          - branch: "main"
-            version: "1.21.4"
           - branch: "1.21.1"
             version: "1.21.1"
+          - branch: "main"
+            version: "1.21.4"
 
     steps:
       - name: "📂 Check-Out Repository"
