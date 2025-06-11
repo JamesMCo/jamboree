@@ -17,14 +17,15 @@ jobs:
           TAG_NAME: ${{ github.event.release.tag_name }}
           MINECRAFT_VERSION: ${{ matrix.version }}
         id: "version_name"
-        run: echo "version_name=${TAG_NAME:1}+${MINECRAFT_VERSION}" >> $GITHUB_OUTPUT
+        run: |
+          echo "version_name=${TAG_NAME:1}+${MINECRAFT_VERSION}" >> $GITHUB_OUTPUT
+          echo "version_name_escaped_plus=${TAG_NAME:1}\+${MINECRAFT_VERSION}" >> $GITHUB_OUTPUT
       - name: "⏬ Get Release Changelog and Download Jar"
         uses: KevinRohn/github-full-release-data@v2
         with:
           version: ${{ github.event.release.tag_name }}
           body-markdown-file-path: "CHANGELOG.md"
-          asset-file: "jamboree-${{ steps.version_name.outputs.version_name }}.jar"
-          asset-output: "."
+          asset-file: "jamboree-${{ steps.version_name.outputs.version_name_escaped_plus }}.jar"
       - name: "📝 Remove Jar Version Details from Changelog"
         shell: "python"
         run: |
@@ -35,8 +36,6 @@ jobs:
           f.write("".join(lines))
           f.truncate()
           f.close()
-      - name: "🪲 Log Contents of CWD For Debugging Purposes"
-        run: ls -la
       - name: "⏫ Publish Jar to Modrinth"
         uses: Kir-Antipov/mc-publish@v3.3
         with:
