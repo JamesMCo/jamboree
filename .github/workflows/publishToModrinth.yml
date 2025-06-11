@@ -24,6 +24,7 @@ jobs:
           version: ${{ github.event.release.tag_name }}
           body-markdown-file-path: "CHANGELOG.md"
           asset-file: "jamboree-${{ steps.version_name.outputs.version_name }}.jar"
+          asset-output: "."
       - name: "📝 Remove Jar Version Details from Changelog"
         shell: "python"
         run: |
