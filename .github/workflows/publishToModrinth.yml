@@ -35,6 +35,8 @@ jobs:
           f.write("".join(lines))
           f.truncate()
           f.close()
+      - name: "🪲 Log Contents of CWD For Debugging Purposes"
+        run: ls -la
       - name: "⏫ Publish Jar to Modrinth"
         uses: Kir-Antipov/mc-publish@v3.3
         with:
