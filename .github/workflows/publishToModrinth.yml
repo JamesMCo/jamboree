@@ -42,6 +42,7 @@ jobs:
           modrinth-id: "HKHihQCz"
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           modrinth-featured: false # Do not set featured ourselves, instead use Modrinth "auto-feature"
+          modrinth-unfeature-mode: none # The token used by this workflow doesn't have permissions to unfeature anything. Also, nothing's featured in the first place.
 
           files: jamboree-${{ steps.version_name.outputs.version_name }}.jar
           name: ${{ steps.version_name.outputs.version_name }}
