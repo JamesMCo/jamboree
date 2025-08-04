@@ -17,8 +17,9 @@ object IslandGameStartNotify {
 
         NoxesiumPackets.CLIENT_MCC_SERVER.addListener(this) noxesiumPacket@{ _, packet, _ ->
             // Only consider scenarios where the config option is enabled,
-            // and we're joining an Island server with an associated game
-            if (!Config.IslandGameStartNotify.enabled || !Util.onMCCIsland || packet.associatedGame.isEmpty()) {
+            // we're joining an Island server that isn't a lobby, and
+            // the server has an associated game
+            if (!Config.IslandGameStartNotify.enabled || !Util.onMCCIsland || packet.serverType == "lobby" || packet.associatedGame.isEmpty()) {
                 return@noxesiumPacket
             }
 
