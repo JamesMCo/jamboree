@@ -155,8 +155,8 @@ class Config {
             title(Component.translatable("config.jamboree"))
             save(handler::save)
 
-            categories.register("jamboree") {
-                name(Component.translatable("config.jamboree"))
+            categories.register("general") {
+                name(Component.translatable("config.jamboree.heading.general"))
 
                 groups.register("chatding") {
                     name(Component.translatable("config.jamboree.chatding"))
@@ -207,6 +207,26 @@ class Config {
                     .build()
                 )
 
+                groups.register("hideblockoutlines") {
+                    name(Component.translatable("config.jamboree.hideblockoutlines"))
+
+                    options.register<Boolean>("enabled") {
+                        name(Component.translatable("config.jamboree.hideblockoutlines.enabled.name"))
+                        description(OptionDescription.of(Component.translatable("config.jamboree.hideblockoutlines.enabled.description").apply {
+                            append(Component.literal("\n"))
+                            append(Component.translatable("config.jamboree.hideblockoutlines.enabled.description.note.header").apply { style = Style.EMPTY.withColor(ChatFormatting.AQUA) })
+                            append(Component.literal("\n"))
+                            append(Component.translatable("config.jamboree.hideblockoutlines.enabled.description.note.body"))
+                        }))
+                        binding(handler.instance()::hideBlockOutlinesEnabled, false)
+                        controller(tickBox())
+                    }
+                }
+            }
+
+            categories.register("mcci") {
+                name(Component.translatable("config.jamboree.heading.mcci"))
+
                 groups.register("compactfishing") {
                     name(Component.translatable("config.jamboree.compactfishing"))
 
@@ -238,22 +258,6 @@ class Config {
                         name(Component.translatable("config.jamboree.compactfishing.showxp.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.compactfishing.showxp.description")))
                         binding(handler.instance()::compactFishingShowXP, true)
-                        controller(tickBox())
-                    }
-                }
-
-                groups.register("hideblockoutlines") {
-                    name(Component.translatable("config.jamboree.hideblockoutlines"))
-
-                    options.register<Boolean>("enabled") {
-                        name(Component.translatable("config.jamboree.hideblockoutlines.enabled.name"))
-                        description(OptionDescription.of(Component.translatable("config.jamboree.hideblockoutlines.enabled.description").apply {
-                            append(Component.literal("\n"))
-                            append(Component.translatable("config.jamboree.hideblockoutlines.enabled.description.note.header").apply { style = Style.EMPTY.withColor(ChatFormatting.AQUA) })
-                            append(Component.literal("\n"))
-                            append(Component.translatable("config.jamboree.hideblockoutlines.enabled.description.note.body"))
-                        }))
-                        binding(handler.instance()::hideBlockOutlinesEnabled, false)
                         controller(tickBox())
                     }
                 }
