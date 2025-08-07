@@ -13,7 +13,9 @@ import dev.isxander.yacl3.dsl.stringField
 import dev.isxander.yacl3.dsl.tickBox
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.ChatFormatting
+import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screens.Screen
+import net.minecraft.client.resources.sounds.SimpleSoundInstance
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.Style
@@ -146,6 +148,10 @@ class Config {
                 .build()
         }
 
+        private var pendingChatDingNotificationSound: SoundEvent = ChatDing.sound
+        private var pendingChatDingPitch: Float = ChatDing.pitch
+        private var pendingChatDingVolume: Float = ChatDing.volume
+
         fun init() {
             logger.info("Loading config")
             handler.load()
@@ -171,19 +177,41 @@ class Config {
                         name(Component.translatable("config.jamboree.chatding.sound.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.chatding.sound.description")))
                         binding(handler.instance()::chatDingSound, uk.mrjamesco.jamboree.ChatDing.NotificationSound.Chime)
+                        addListener { option, _ ->
+                            pendingChatDingNotificationSound = option.pendingValue().sound
+                        }
                         controller(enumDropdown<uk.mrjamesco.jamboree.ChatDing.NotificationSound>())
                     }
                     options.register<Float>("pitch") {
                         name(Component.translatable("config.jamboree.chatding.pitch.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.chatding.pitch.description")))
                         binding(handler.instance()::chatDingPitch, 1.0f)
+                        addListener { option, _ ->
+                            pendingChatDingPitch = option.pendingValue().coerceIn(0.0f..2.0f)
+                        }
                         controller(slider(0.0f..2.0f, 0.1f))
                     }
                     options.register<Int>("volume") {
                         name(Component.translatable("config.jamboree.chatding.volume.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.chatding.volume.description")))
                         binding(handler.instance()::chatDingVolume, 100)
+                        addListener { option, _ ->
+                            pendingChatDingVolume = option.pendingValue().coerceIn(0..100) / 100.0f
+                        }
                         controller(slider(0..100, 1) { Component.literal("$it%") })
+                    }
+                    options.registerButton("preview") {
+                        name(Component.translatable("config.jamboree.chatding.preview.name"))
+                        description(OptionDescription.of(Component.translatable("config.jamboree.chatding.preview.description")))
+                        text(Component.translatable("config.jamboree.chatding.preview.icon"))
+                        action { _, _ ->
+                            // Method signature of .play() changed in 1.21.5 to include a return type of PlayResult,
+                            // so for the sake of compatibility, delaying the sound by 1 tick is *fine*.
+                            Minecraft.getInstance().soundManager.playDelayed(
+                                SimpleSoundInstance.forUI(pendingChatDingNotificationSound, pendingChatDingPitch, pendingChatDingVolume),
+                                1
+                            )
+                        }
                     }
                     options.register<Int>("cooldown") {
                         name(Component.translatable("config.jamboree.chatding.cooldown.name"))
