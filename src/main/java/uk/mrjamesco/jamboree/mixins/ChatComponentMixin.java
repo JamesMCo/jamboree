@@ -14,5 +14,5 @@ public interface ChatComponentMixin {
     List<GuiMessage> getAllMessages();
 
     @Invoker("refreshTrimmedMessages")
-    void refreshTrimmedMessages();
+    void refreshChat();
 }
