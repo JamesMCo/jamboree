@@ -98,7 +98,7 @@ object ReplacingFishingMessageHandler : FishingMessageHandler {
                         message.signature,
                         message.tag
                     )
-                    refreshTrimmedMessages()
+                    refreshChat()
                     return@replaceExistingCatchMessage
                 }
             }
