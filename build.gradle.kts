@@ -66,8 +66,9 @@ tasks {
             expand(getProperties() + mutableMapOf(
                 "version" to project.version,
                 "minecraft_version" to libs.versions.minecraft.get(),
-                "noxesium_version" to libs.versions.noxesium.get(),
+                "fabric_kotlin_version" to libs.versions.fabric.kotlin.get(),
                 "fabric_loader_version" to libs.versions.fabric.loader.get(),
+                "noxesium_version" to libs.versions.noxesium.get(),
                 "yacl_version" to libs.versions.yacl.get()
             ))
         }
@@ -97,6 +98,7 @@ tasks {
     compileKotlin {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_21)
+            optIn.add("kotlin.time.ExperimentalTime")
         }
     }
 }
