@@ -1,63 +1,63 @@
 package uk.mrjamesco.jamboree
 
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents
 import net.minecraft.client.Minecraft
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.sounds.SoundEvents
 import uk.mrjamesco.jamboree.Jamboree.Companion.logger
 import uk.mrjamesco.jamboree.Util.requestAttentionIfNotActive
+import kotlin.time.Clock
+import kotlin.time.Instant
 
 object ChatDing {
     enum class NotificationSound {
         Banjo {
-            override val sound = SoundEvents.NOTE_BLOCK_BANJO.value()
+            override val sound: SoundEvent = SoundEvents.NOTE_BLOCK_BANJO.value()
         },
         BassDrum {
-            override val sound = SoundEvents.NOTE_BLOCK_BASEDRUM.value()
+            override val sound: SoundEvent = SoundEvents.NOTE_BLOCK_BASEDRUM.value()
         },
         Bass {
-            override val sound = SoundEvents.NOTE_BLOCK_BASS.value()
+            override val sound: SoundEvent = SoundEvents.NOTE_BLOCK_BASS.value()
         },
         Bell {
-            override val sound = SoundEvents.NOTE_BLOCK_BELL.value()
+            override val sound: SoundEvent = SoundEvents.NOTE_BLOCK_BELL.value()
         },
         Bit {
-            override val sound = SoundEvents.NOTE_BLOCK_BIT.value()
+            override val sound: SoundEvent = SoundEvents.NOTE_BLOCK_BIT.value()
         },
         Chime {
-            override val sound = SoundEvents.NOTE_BLOCK_CHIME.value()
+            override val sound: SoundEvent = SoundEvents.NOTE_BLOCK_CHIME.value()
         },
         CowBell {
-            override val sound = SoundEvents.NOTE_BLOCK_COW_BELL.value()
+            override val sound: SoundEvent = SoundEvents.NOTE_BLOCK_COW_BELL.value()
         },
         Didgeridoo {
-            override val sound = SoundEvents.NOTE_BLOCK_DIDGERIDOO.value()
+            override val sound: SoundEvent = SoundEvents.NOTE_BLOCK_DIDGERIDOO.value()
         },
         Flute {
-            override val sound = SoundEvents.NOTE_BLOCK_FLUTE.value()
+            override val sound: SoundEvent = SoundEvents.NOTE_BLOCK_FLUTE.value()
         },
         Guitar {
-            override val sound = SoundEvents.NOTE_BLOCK_GUITAR.value()
+            override val sound: SoundEvent = SoundEvents.NOTE_BLOCK_GUITAR.value()
         },
         Harp {
-            override val sound = SoundEvents.NOTE_BLOCK_HARP.value()
+            override val sound: SoundEvent = SoundEvents.NOTE_BLOCK_HARP.value()
         },
         Hat {
-            override val sound = SoundEvents.NOTE_BLOCK_HAT.value()
+            override val sound: SoundEvent = SoundEvents.NOTE_BLOCK_HAT.value()
         },
         Pling {
-            override val sound = SoundEvents.NOTE_BLOCK_PLING.value()
+            override val sound: SoundEvent = SoundEvents.NOTE_BLOCK_PLING.value()
         },
         Snare {
-            override val sound = SoundEvents.NOTE_BLOCK_SNARE.value()
+            override val sound: SoundEvent = SoundEvents.NOTE_BLOCK_SNARE.value()
         },
         Vibraphone {
-            override val sound = SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE.value()
+            override val sound: SoundEvent = SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE.value()
         },
         Xylophone {
-            override val sound = SoundEvents.NOTE_BLOCK_XYLOPHONE.value()
+            override val sound: SoundEvent = SoundEvents.NOTE_BLOCK_XYLOPHONE.value()
         };
 
         abstract val sound: SoundEvent
