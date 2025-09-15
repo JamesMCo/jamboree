@@ -39,7 +39,12 @@ object DelayedTwoLinesFishingMessageHandler : FishingMessageHandler {
                 .siblings         // e.g. "[]", " ", "Supply Preserve"
                 .let {
                     iconBuffer.addLast(Pair(
-                        it.first().copy().apply { style = message.siblings.first().style },
+                        it.first().copy().apply {
+                            // Use existing style (e.g. font), but replace hover event with that of overall message
+                            if (message.siblings.first().style.hoverEvent !== null) {
+                                this.style = style.withHoverEvent(message.siblings.first().style.hoverEvent)
+                            }
+                        },
                         altIconOrder(it.last().string)
                     ))
                 }
