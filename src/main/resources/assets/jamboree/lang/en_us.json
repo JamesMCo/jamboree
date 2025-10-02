@@ -1,6 +1,14 @@
 {
     "config.jamboree": "Jamboree",
 
+    "config.jamboree.adjustrendering": "Adjust Rendering",
+    "config.jamboree.adjustrendering.description.note.header": "ℹ NOTE",
+    "config.jamboree.adjustrendering.description.note.body": "This only has an effect when you are in Creative Mode.",
+    "config.jamboree.adjustrendering.hideblockoutlines.name": "Hide Block Outlines",
+    "config.jamboree.adjustrendering.hideblockoutlines.description": "When enabled, hides the outlines drawn around blocks pointed at by the crosshair.",
+    "config.jamboree.adjustrendering.hidescoreboard.name": "Hide Scoreboard",
+    "config.jamboree.adjustrendering.hidescoreboard.description": "When enabled, hides the scoreboard drawn on the side of the screen.",
+
     "config.jamboree.chatding": "Chat Ding",
     "config.jamboree.chatding.enabled.name": "Enabled",
     "config.jamboree.chatding.enabled.description": "When enabled, Chat Ding plays a sound when one of the filter phrases is sent in chat.",
@@ -44,12 +52,6 @@
 
     "config.jamboree.heading.general": "General",
     "config.jamboree.heading.mcci": "MCC Island",
-
-    "config.jamboree.hideblockoutlines": "Hide Block Outlines",
-    "config.jamboree.hideblockoutlines.enabled.name": "Enabled",
-    "config.jamboree.hideblockoutlines.enabled.description": "When enabled, hides the outlines drawn around blocks pointed at by the crosshair.",
-    "config.jamboree.hideblockoutlines.enabled.description.note.header": "ℹ NOTE",
-    "config.jamboree.hideblockoutlines.enabled.description.note.body": "This only has an effect when you are in Creative Mode.",
 
     "config.jamboree.islandgamestartnotify": "Island Game Start Notify",
     "config.jamboree.islandgamestartnotify.enabled.name": "Enabled",
