@@ -1,8 +1,9 @@
 {
-    "package": "uk.mrjamesco.jamboree.mixins",
-    "mixins": [],
-    "client": [
-      "ChatComponentMixin"
-    ],
-    "server": []
+  "package": "uk.mrjamesco.jamboree.mixins",
+  "mixins": [],
+  "client": [
+    "ChatComponentMixin",
+    "GuiMixin"
+  ],
+  "server": []
 }

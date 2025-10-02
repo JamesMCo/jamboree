@@ -84,7 +84,18 @@ class Config {
     var hideBlockOutlinesEnabled: Boolean = false
 
     @SerialEntry
+    var hideScoreboardEnabled: Boolean = false
+
+    @SerialEntry
     var islandGameStartNotifyEnabled: Boolean = false
+
+    object AdjustRendering {
+        val hideBlockOutlines: Boolean
+            get() = handler.instance().hideBlockOutlinesEnabled
+
+        val hideScoreboard: Boolean
+            get() = handler.instance().hideScoreboardEnabled
+    }
 
     object ChatDing {
         val enabled: Boolean
@@ -124,11 +135,6 @@ class Config {
 
         val mode: FishingMessageHandler
             get() = handler.instance().compactFishingMode.get()
-    }
-
-    object HideBlockOutlines {
-        val enabled: Boolean
-            get() = handler.instance().hideBlockOutlinesEnabled
     }
 
     object IslandGameStartNotify {
@@ -235,18 +241,30 @@ class Config {
                     .build()
                 )
 
-                groups.register("hideblockoutlines") {
-                    name(Component.translatable("config.jamboree.hideblockoutlines"))
+                groups.register("adjustrendering") {
+                    name(Component.translatable("config.jamboree.adjustrendering"))
 
-                    options.register<Boolean>("enabled") {
-                        name(Component.translatable("config.jamboree.hideblockoutlines.enabled.name"))
-                        description(OptionDescription.of(Component.translatable("config.jamboree.hideblockoutlines.enabled.description").apply {
+                    options.register<Boolean>("hideblockoutlines") {
+                        name(Component.translatable("config.jamboree.adjustrendering.hideblockoutlines.name"))
+                        description(OptionDescription.of(Component.translatable("config.jamboree.adjustrendering.hideblockoutlines.description").apply {
                             append(Component.literal("\n"))
-                            append(Component.translatable("config.jamboree.hideblockoutlines.enabled.description.note.header").apply { style = Style.EMPTY.withColor(ChatFormatting.AQUA) })
+                            append(Component.translatable("config.jamboree.adjustrendering.description.note.header").apply { style = Style.EMPTY.withColor(ChatFormatting.AQUA) })
                             append(Component.literal("\n"))
-                            append(Component.translatable("config.jamboree.hideblockoutlines.enabled.description.note.body"))
+                            append(Component.translatable("config.jamboree.adjustrendering.description.note.body"))
                         }))
                         binding(handler.instance()::hideBlockOutlinesEnabled, false)
+                        controller(tickBox())
+                    }
+
+                    options.register<Boolean>("hidescoreboard") {
+                        name(Component.translatable("config.jamboree.adjustrendering.hidescoreboard.name"))
+                        description(OptionDescription.of(Component.translatable("config.jamboree.adjustrendering.hidescoreboard.description").apply {
+                            append(Component.literal("\n"))
+                            append(Component.translatable("config.jamboree.adjustrendering.description.note.header").apply { style = Style.EMPTY.withColor(ChatFormatting.AQUA) })
+                            append(Component.literal("\n"))
+                            append(Component.translatable("config.jamboree.adjustrendering.description.note.body"))
+                        }))
+                        binding(handler.instance()::hideScoreboardEnabled, false)
                         controller(tickBox())
                     }
                 }
