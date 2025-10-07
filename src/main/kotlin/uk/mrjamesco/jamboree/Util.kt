@@ -24,9 +24,9 @@ object Util {
     }
 
     val Window.isActive: Boolean
-        get() = GLFW.glfwGetWindowAttrib(window, GLFW.GLFW_FOCUSED) != 0
+        get() = GLFW.glfwGetWindowAttrib(handle(), GLFW.GLFW_FOCUSED) != 0
 
-    fun Window.requestAttention() = GLFW.glfwRequestWindowAttention(window)
+    fun Window.requestAttention() = GLFW.glfwRequestWindowAttention(handle())
 
     fun Window.requestAttentionIfNotActive() {
         if (!isActive) {
