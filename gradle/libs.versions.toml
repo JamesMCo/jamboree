@@ -1,10 +1,10 @@
 [versions]
-fabric-api = "0.119.2+1.21.4"
+fabric-api = "0.133.14+1.21.9"
 fabric-kotlin = "1.13.5+kotlin.2.2.10"
-fabric-loader = "0.16.9"
+fabric-loader = "0.17.2"
 fabric-loom = "1.11-SNAPSHOT"
 kotlin = "2.2.10"
-minecraft = "1.21.4"
+minecraft = "1.21.9"
 modmenu = "11.0.3"
 noxesium = "2.6.1"
 slf4j = "2.0.16"
