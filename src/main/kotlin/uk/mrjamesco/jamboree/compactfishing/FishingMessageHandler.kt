@@ -22,10 +22,30 @@ enum class FishingMessageHandlers : NameableEnum {
         override fun getDisplayName(): Component = Component.translatable("config.jamboree.compactfishing.mode.delayedtwolines.name")
         override fun getDescription(): Component = Component.translatable("config.jamboree.compactfishing.mode.delayedtwolines.description")
     },
+    DelayedTwoLinesXpSeparate {
+        override fun get() = DelayedTwoLinesXpSeparateFishingMessageHandler
+        override fun getDisplayName(): Component = Component.translatable("config.jamboree.compactfishing.mode.delayedtwolinesxpseparate.name")
+        override fun getDescription(): Component = Component.translatable("config.jamboree.compactfishing.mode.delayedtwolinesxpseparate.description")
+    },
     Replacing {
         override fun get() = ReplacingFishingMessageHandler
         override fun getDisplayName(): Component = Component.translatable("config.jamboree.compactfishing.mode.replacing.name")
         override fun getDescription(): Component = Component.translatable("config.jamboree.compactfishing.mode.replacing.description").apply {
+            append(Component.literal("\n"))
+            append(Component.translatable("config.jamboree.compactfishing.mode.replacing.description.note.header").apply { style = Style.EMPTY.withColor(ChatFormatting.AQUA) })
+            append(Component.literal("\n"))
+            append(Component.translatable("config.jamboree.compactfishing.mode.replacing.description.note.body"))
+
+            append(Component.literal("\n"))
+            append(Component.translatable("config.jamboree.compactfishing.mode.replacing.description.warning.header").apply { style = Style.EMPTY.withColor(ChatFormatting.RED) })
+            append(Component.literal("\n"))
+            append(Component.translatable("config.jamboree.compactfishing.mode.replacing.description.warning.body"))
+        }
+    },
+    ReplacingXpSeparate {
+        override fun get() = ReplacingXpSeparateFishingMessageHandler
+        override fun getDisplayName(): Component = Component.translatable("config.jamboree.compactfishing.mode.replacingxpseparate.name")
+        override fun getDescription(): Component = Component.translatable("config.jamboree.compactfishing.mode.replacingxpseparate.description").apply {
             append(Component.literal("\n"))
             append(Component.translatable("config.jamboree.compactfishing.mode.replacing.description.note.header").apply { style = Style.EMPTY.withColor(ChatFormatting.AQUA) })
             append(Component.literal("\n"))
