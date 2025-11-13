@@ -13,6 +13,7 @@ class Jamboree: ModInitializer {
         Util.registerListeners()
         ChatDing.registerListeners()
         CompactFishing.registerListeners()
+        HideBlockOutlines.registerListeners()
         IslandGameStartNotify.registerListeners()
     }
 
