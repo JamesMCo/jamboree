@@ -16,8 +16,10 @@ jobs:
             version: "1.21.1"
           - branch: "1.21.4"
             version: "1.21.4"
-          - branch: "main"
+          - branch: "1.21.9"
             version: "1.21.9"
+          - branch: "main"
+            version: "1.21.10"
 
     steps:
       - name: "📂 Check-Out Repository"
