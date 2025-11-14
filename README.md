@@ -11,7 +11,9 @@ _(Some features require [Noxesium](https://modrinth.com/mod/noxesium) - see belo
 
 - 🫙 General Features
   - Chat Ding: play a sound when certain phrases or words appear in messages in chat
-  - Hide Block Outlines: hide block outlines when the player is in creative mode (useful for recording from an external perspective in creative mode when you don't want to be able to see block outlines, but do want to be able to see the rest of the UI)
+  - Adjust Rendering: various toggles to be able to adjust the rendering of the game
+      - Hide Block Outlines: hide block outlines when the player is in creative mode (useful for recording from an external perspective in creative mode when you don't want to be able to see block outlines, but do want to be able to see the rest of the UI)
+      - Hide Scoreboard: hide scoreboard when the player is in creative mode (useful for recording in creative mode when you don't want to be able to see the scoreboard, but do want to be able to see the rest of the UI)
 - 🏝️ MCC Island Features
   - Compact Fishing: combine multiple messages shown when catching a fish on MCC Island in to one message (requires Noxesium)
   - Island Game Start Notify: cause the window icon to flash when tabbed out while joining a game server on MCC Island, such as when a game queue has filled (requires Noxesium)
