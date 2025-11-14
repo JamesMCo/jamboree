@@ -40,6 +40,7 @@
     "config.jamboree.compactfishing.mode.delayedtwolinesxpseparate.name": "Delayed (Two Lines, XP on Separate Line)",
     "config.jamboree.compactfishing.mode.delayedtwolinesxpseparate.description": "Wait until all messages related to a catch have been received before showing a message combining the \"You caught:\" message and icon messages on one line, followed by another with the XP.",
     "config.jamboree.compactfishing.mode.replacing.name": "Animated",
+    "config.jamboree.compactfishing.mode.replacing.chatheadscompatwarning": "Warning: with an animated compact fishing mode enabled and the Chat Heads mod installed, your game logs may fill very quickly with warnings. Consider changing your compact fishing mode to a non-animated mode.",
     "config.jamboree.compactfishing.mode.replacing.description": "Show the initial \"You caught:\" message immediately, then update it with icons and XP as they are received.",
     "config.jamboree.compactfishing.mode.replacing.description.note.header": "ℹ NOTE",
     "config.jamboree.compactfishing.mode.replacing.description.note.body": "In this mode, your game logs will not show the icons or XP, only the caught fish.",

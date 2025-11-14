@@ -32,6 +32,9 @@
     "recommends": {
         "noxesium": ">=${noxesium_version}"
     },
+    "conflicts": {
+        "chat_heads": "<1.0.0"
+    },
 
     "name": "Jamboree",
     "description": "Miscellaneous utility stuff (including for MCC Island)",
