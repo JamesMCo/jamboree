@@ -67,6 +67,13 @@ class Config {
 
     @SerialEntry
     var compactFishingEnabled: Boolean = false
+        set(value) {
+            val oldValue = field
+            field = value
+            if (oldValue != field) {
+                uk.mrjamesco.jamboree.compactfishing.CompactFishing.maybeSendChatHeadsWarning()
+            }
+        }
 
     @SerialEntry
     var compactFishingShowIcons: Boolean = true
@@ -79,6 +86,13 @@ class Config {
 
     @SerialEntry
     var compactFishingMode: FishingMessageHandlers = FishingMessageHandlers.DelayedOneLine
+        set(value) {
+            val oldValue = field
+            field = value
+            if (oldValue != field) {
+                uk.mrjamesco.jamboree.compactfishing.CompactFishing.maybeSendChatHeadsWarning()
+            }
+        }
 
     @SerialEntry
     var hideBlockOutlinesEnabled: Boolean = false
