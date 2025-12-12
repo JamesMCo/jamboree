@@ -58,7 +58,7 @@ object CompactFishing {
         logger.info("Registering CompactFishing listeners")
 
         // Detect being in a fishing server
-        NoxesiumPackets.CLIENT_MCC_SERVER.addListener(this) { _, packet, _ -> onFishingIsland = (packet.serverType == "lobby" && Regex("^(temperate|tropical|barren)_.+").matches(packet.subType)) }
+        NoxesiumPackets.CLIENT_MCC_SERVER.addListener(this) { _, packet, _ -> onFishingIsland = (packet.serverType == "fishing") }
 
         // Detect fishing messages
         ClientReceiveMessageEvents.ALLOW_GAME.register allowMessage@{ message, _ ->
