@@ -5,6 +5,9 @@
 
     "environment": "client",
     "entrypoints": {
+        "noxesium": [
+            "uk.mrjamesco.jamboree.JamboreeNoxEntrypoint"
+        ],
         "main": [
             {
                 "value": "uk.mrjamesco.jamboree.Jamboree",
@@ -47,6 +50,9 @@
                 "homepage": "https://mrjamesco.uk"
             }
         }
+    ],
+    "contributors": [
+        "Pe3ep"
     ],
     "license": "MIT",
     "icon": "assets/jamboree/icon.png"

@@ -19,7 +19,7 @@ import net.minecraft.client.resources.sounds.SimpleSoundInstance
 import net.minecraft.sounds.SoundEvent
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.Style
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import uk.mrjamesco.jamboree.Jamboree.Companion.logger
 import uk.mrjamesco.jamboree.compactfishing.FishingMessageHandler
 import uk.mrjamesco.jamboree.compactfishing.FishingMessageHandlers
@@ -145,7 +145,7 @@ class Config {
     companion object {
         val handler: ConfigClassHandler<Config> by lazy {
             ConfigClassHandler.createBuilder(Config::class.java)
-                .id(ResourceLocation.fromNamespaceAndPath("jamboree", "config"))
+                .id(Identifier.fromNamespaceAndPath("jamboree", "config"))
                 .serializer { config ->
                     GsonConfigSerializerBuilder.create(config)
                         .setPath(FabricLoader.getInstance().configDir.resolve("jamboree.json"))

@@ -4,7 +4,6 @@ import net.fabricmc.api.ModInitializer
 import net.fabricmc.loader.api.FabricLoader
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import uk.mrjamesco.jamboree.compactfishing.CompactFishing
 
 class Jamboree: ModInitializer {
     override fun onInitialize() {
@@ -12,9 +11,7 @@ class Jamboree: ModInitializer {
         Config.init()
         Util.registerListeners()
         ChatDing.registerListeners()
-        CompactFishing.registerListeners()
         HideBlockOutlines.registerListeners()
-        IslandGameStartNotify.registerListeners()
     }
 
     companion object {
