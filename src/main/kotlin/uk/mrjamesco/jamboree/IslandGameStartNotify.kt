@@ -1,25 +1,19 @@
 package uk.mrjamesco.jamboree
 
-import com.noxcrew.noxesium.network.NoxesiumPackets
-import net.fabricmc.loader.api.FabricLoader
+import com.noxcrew.noxesium.core.mcc.ClientboundMccServerPacket
+import com.noxcrew.noxesium.core.mcc.MccPackets
 import net.minecraft.client.Minecraft
 import uk.mrjamesco.jamboree.Jamboree.Companion.logger
 import uk.mrjamesco.jamboree.Util.requestAttentionIfNotActive
 
 object IslandGameStartNotify {
     fun registerListeners() {
-        if (!FabricLoader.getInstance().isModLoaded("noxesium")) {
-            logger.info("Not registering IslandGameStartNotify listeners, as Noxesium is not loaded")
-            return
-        }
-
         logger.info("Registering IslandGameStartNotify listeners")
 
-        NoxesiumPackets.CLIENT_MCC_SERVER.addListener(this) noxesiumPacket@{ _, packet, _ ->
+        MccPackets.CLIENTBOUND_MCC_SERVER.addListener(this, ClientboundMccServerPacket::class.java) noxesiumPacket@{ _, packet, _ ->
             // Only consider scenarios where the config option is enabled,
-            // we're joining an Island server that isn't a lobby, and
-            // the server has an associated game
-            if (!Config.IslandGameStartNotify.enabled || !Util.onMCCIsland || packet.serverType == "lobby" || packet.associatedGame.isEmpty()) {
+            // we're joining an Island server that isn't a lobby
+            if (!Config.IslandGameStartNotify.enabled || !Util.onMCCIsland || packet.server == "lobby" || packet.server == "fishing") {
                 return@noxesiumPacket
             }
 
