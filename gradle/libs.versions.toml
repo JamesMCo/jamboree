@@ -6,7 +6,6 @@ fabric-loom = "1.11-SNAPSHOT"
 kotlin = "2.2.10"
 minecraft = "1.21.1"
 modmenu = "11.0.3"
-noxesium = "2.3.3"
 slf4j = "2.0.16"
 yacl = "3.6.1+1.21-fabric"
 
@@ -16,7 +15,6 @@ fabric-kotlin = { module = "net.fabricmc:fabric-language-kotlin", version.ref = 
 fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric-loader" }
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
 modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
-noxesium = { module = "com.noxcrew.noxesium:fabric", version.ref = "noxesium"}
 slf4j = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
 yacl = { module = "dev.isxander:yet-another-config-lib", version.ref = "yacl" }
 

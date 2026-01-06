@@ -29,12 +29,6 @@
         "fabric-language-kotlin": ">=${fabric_kotlin_version}",
         "yet_another_config_lib_v3": ">=${yacl_version}"
     },
-    "recommends": {
-        "noxesium": ">=${noxesium_version}"
-    },
-    "conflicts": {
-        "chat_heads": "<1.0.0"
-    },
 
     "name": "Jamboree",
     "description": "Miscellaneous utility stuff (including for MCC Island)",
@@ -50,6 +44,9 @@
                 "homepage": "https://mrjamesco.uk"
             }
         }
+    ],
+    "contributors": [
+        "Pe3ep"
     ],
     "license": "MIT",
     "icon": "assets/jamboree/icon.png"

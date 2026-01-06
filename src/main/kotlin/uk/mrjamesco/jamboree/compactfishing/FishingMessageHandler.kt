@@ -4,6 +4,7 @@ import dev.isxander.yacl3.api.NameableEnum
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.Style
+import kotlin.error
 
 interface FishingMessageHandler {
     fun handleCaughtMessage(message: Component): Boolean
@@ -13,22 +14,22 @@ interface FishingMessageHandler {
 
 enum class FishingMessageHandlers : NameableEnum {
     DelayedOneLine {
-        override fun get() = DelayedOneLineFishingMessageHandler
+        override fun get() = error("Tried to get DelayedOneLineFishingMessageHandler on a version which does not support Compact Fishing")
         override fun getDisplayName(): Component = Component.translatable("config.jamboree.compactfishing.mode.delayedoneline.name")
         override fun getDescription(): Component = Component.translatable("config.jamboree.compactfishing.mode.delayedoneline.description")
     },
     DelayedTwoLines {
-        override fun get() = DelayedTwoLinesFishingMessageHandler
+        override fun get() = error("Tried to get DelayedTwoLinesFishingMessageHandler on a version which does not support Compact Fishing")
         override fun getDisplayName(): Component = Component.translatable("config.jamboree.compactfishing.mode.delayedtwolines.name")
         override fun getDescription(): Component = Component.translatable("config.jamboree.compactfishing.mode.delayedtwolines.description")
     },
     DelayedTwoLinesXpSeparate {
-        override fun get() = DelayedTwoLinesXpSeparateFishingMessageHandler
+        override fun get() = error("Tried to get DelayedTwoLinesXpSeparateFishingMessageHandler on a version which does not support Compact Fishing")
         override fun getDisplayName(): Component = Component.translatable("config.jamboree.compactfishing.mode.delayedtwolinesxpseparate.name")
         override fun getDescription(): Component = Component.translatable("config.jamboree.compactfishing.mode.delayedtwolinesxpseparate.description")
     },
     Replacing {
-        override fun get() = ReplacingFishingMessageHandler
+        override fun get() = error("Tried to get ReplacingFishingMessageHandler on a version which does not support Compact Fishing")
         override fun getDisplayName(): Component = Component.translatable("config.jamboree.compactfishing.mode.replacing.name")
         override fun getDescription(): Component = Component.translatable("config.jamboree.compactfishing.mode.replacing.description").apply {
             append(Component.literal("\n"))
@@ -43,7 +44,7 @@ enum class FishingMessageHandlers : NameableEnum {
         }
     },
     ReplacingXpSeparate {
-        override fun get() = ReplacingXpSeparateFishingMessageHandler
+        override fun get() = error("Tried to get ReplacingXpSeparateFishingMessageHandler on a version which does not support Compact Fishing")
         override fun getDisplayName(): Component = Component.translatable("config.jamboree.compactfishing.mode.replacingxpseparate.name")
         override fun getDescription(): Component = Component.translatable("config.jamboree.compactfishing.mode.replacingxpseparate.description").apply {
             append(Component.literal("\n"))

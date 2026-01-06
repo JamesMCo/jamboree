@@ -1,5 +1,6 @@
 package uk.mrjamesco.jamboree
 
+import dev.isxander.yacl3.api.LabelOption
 import dev.isxander.yacl3.api.ListOption
 import dev.isxander.yacl3.api.OptionDescription
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler
@@ -67,13 +68,6 @@ class Config {
 
     @SerialEntry
     var compactFishingEnabled: Boolean = false
-        set(value) {
-            val oldValue = field
-            field = value
-            if (oldValue != field) {
-                uk.mrjamesco.jamboree.compactfishing.CompactFishing.maybeSendChatHeadsWarning()
-            }
-        }
 
     @SerialEntry
     var compactFishingShowIcons: Boolean = true
@@ -86,13 +80,6 @@ class Config {
 
     @SerialEntry
     var compactFishingMode: FishingMessageHandlers = FishingMessageHandlers.DelayedOneLine
-        set(value) {
-            val oldValue = field
-            field = value
-            if (oldValue != field) {
-                uk.mrjamesco.jamboree.compactfishing.CompactFishing.maybeSendChatHeadsWarning()
-            }
-        }
 
     @SerialEntry
     var hideBlockOutlinesEnabled: Boolean = false
@@ -148,7 +135,7 @@ class Config {
             get() = handler.instance().compactFishingShowXP
 
         val mode: FishingMessageHandler
-            get() = handler.instance().compactFishingMode.get()
+            get() = error("Tried to get the current Fishing Message Handler on a version which does not support Compact Fishing")
     }
 
     object IslandGameStartNotify {
@@ -286,6 +273,17 @@ class Config {
 
             categories.register("mcci") {
                 name(Component.translatable("config.jamboree.heading.mcci"))
+
+                rootOptions.registerLabel("nomcci",
+                    Component.empty().apply {
+                        style = Style.EMPTY.withBold(true)
+                        append(Component.translatable("config.jamboree.nomcci.header").apply {
+                            style = Style.EMPTY.withColor(ChatFormatting.RED)
+                        })
+                        append(Component.literal("\n"))
+                        append(Component.translatable("config.jamboree.nomcci.body"))
+                    }
+                )
 
                 groups.register("compactfishing") {
                     name(Component.translatable("config.jamboree.compactfishing"))

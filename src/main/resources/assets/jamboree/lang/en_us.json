@@ -62,6 +62,9 @@
     "config.jamboree.islandgamestartnotify.enabled.name": "Enabled",
     "config.jamboree.islandgamestartnotify.enabled.description": "When enabled, causes the window icon to flash when tabbed out while joining a game server on MCC Island, such as when a game queue has filled. Requires Noxesium.",
 
+    "config.jamboree.nomcci.header": "ℹ NOTE",
+    "config.jamboree.nomcci.body": "This version of Jamboree does not have any MCC Island related functionality.\nAny changes made will persist if you switch to versions of Minecraft and Jamboree compatible with MCC Island.",
+
     "modmenu.nameTranslation.jamboree": "Jamboree",
     "modmenu.descriptionTranslation.jamboree": "Miscellaneous utility stuff (including for MCC Island)",
     "modmenu.summaryTranslation.jamboree": "Miscellaneous utility stuff (including for MCC Island)"
