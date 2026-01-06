@@ -54,6 +54,9 @@
             }
         }
     ],
+    "contributors": [
+        "Pe3ep"
+    ],
     "license": "MIT",
     "icon": "assets/jamboree/icon.png"
 }
