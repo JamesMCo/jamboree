@@ -90,20 +90,24 @@ object DelayedTwoLinesFishingMessageHandler : FishingMessageHandler {
         return false
     }
 
-    fun buildIconXPMessage(): Component = arrowPrefix.copy()?.apply {
-        if (iconBuffer.isNotEmpty()) {
-            append(Component.literal(" "))
+    fun buildIconXPMessage(): Component = when (::arrowPrefix.isInitialized) {
+        true -> arrowPrefix.copy().apply {
+            if (iconBuffer.isNotEmpty()) {
+                append(Component.literal(" "))
 
-            if (Config.CompactFishing.useAltIconOrder) {
-                iconBuffer.sortedBy { it.second }
-            } else {
-                iconBuffer
-            }.forEach { append(it.first) }
+                if (Config.CompactFishing.useAltIconOrder) {
+                    iconBuffer.sortedBy { it.second }
+                } else {
+                    iconBuffer
+                }.forEach { append(it.first) }
+            }
+
+            if (xpMessage != null) {
+                append(Component.literal(" +"))
+                append(xpMessage!!)
+            }
         }
 
-        if (xpMessage != null) {
-            append(Component.literal(" +"))
-            append(xpMessage!!)
-        }
-    } ?: Component.empty()
+        false -> Component.empty()
+    }
 }
