@@ -3,9 +3,11 @@ package uk.mrjamesco.jamboree.compactfishing
 import com.noxcrew.noxesium.core.mcc.ClientboundMccServerPacket
 import com.noxcrew.noxesium.core.mcc.MccPackets
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents
+import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.network.chat.Component
 import uk.mrjamesco.jamboree.Config
 import uk.mrjamesco.jamboree.Jamboree.Companion.logger
+import uk.mrjamesco.jamboree.JamboreeNoxEntrypoint
 import uk.mrjamesco.jamboree.Util.onMCCIsland
 
 object CompactFishing {
@@ -39,10 +41,17 @@ object CompactFishing {
     internal fun Component.isXPMessage(): Boolean     = Regex("^\\s*. You earned: .+").matches(this.string)
 
     fun registerListeners() {
+        if (!FabricLoader.getInstance().isModLoaded("noxesium")) {
+            logger.info("Not registering CompactFishing listeners, as Noxesium is not loaded")
+            return
+        }
+
         logger.info("Registering CompactFishing listeners")
 
         // Detect being in a fishing server
-        MccPackets.CLIENTBOUND_MCC_SERVER.addListener(this, ClientboundMccServerPacket::class.java) { _, packet, _ -> onFishingIsland = (packet.server == "fishing") }
+        JamboreeNoxEntrypoint.whenInitialized {
+            MccPackets.CLIENTBOUND_MCC_SERVER.addListener(this, ClientboundMccServerPacket::class.java) { _, packet, _ -> onFishingIsland = (packet.server == "fishing") }
+        }
 
         // Detect fishing messages
         ClientReceiveMessageEvents.ALLOW_GAME.register allowMessage@{ message, _ ->
