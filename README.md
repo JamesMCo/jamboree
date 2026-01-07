@@ -2,7 +2,7 @@
 
 A Minecraft Fabric mod containing miscellaneous utility stuff (including for MCC Island)
 
-**Requires Minecraft 1.21.1 or higher, [Fabric Language Kotlin](https://modrinth.com/mod/fabric-language-kotlin),
+**Requires Minecraft 1.21 or higher, [Fabric Language Kotlin](https://modrinth.com/mod/fabric-language-kotlin),
 and [Yet Another Config Lib](https://modrinth.com/mod/yacl).
 [Mod Menu](https://modrinth.com/mod/modmenu) is an optional dependency
 (though I'd recommend it unless you are particularly fond of editing
