@@ -9,6 +9,10 @@ jobs:
     strategy:
       matrix:
         version: [ "1.21", "1.21.4", "1.21.9", "1.21.10" ]
+        noxesium: [ true ]
+        include:
+          - version: "1.21"
+            noxesium: false
       max-parallel: 1 # Guarantee versions are published in this order
 
     steps:
@@ -53,6 +57,6 @@ jobs:
             fabric-language-kotlin(required)
             yacl(required)
             fabric-api(required)
-            noxesium(optional)
+            ${{ matrix.noxesium && 'noxesium(optional)' || '' }}
             modmenu(optional)
           # Loader and Minecraft versions should be parsed from fabric.mod.json
