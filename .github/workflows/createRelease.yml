@@ -12,8 +12,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - branch: "1.21.1"
-            version: "1.21.1"
+          - branch: "1.21"
+            version: "1.21"
           - branch: "1.21.4"
             version: "1.21.4"
           - branch: "1.21.9"

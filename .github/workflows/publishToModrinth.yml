@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [ "1.21.1", "1.21.4", "1.21.9", "1.21.10" ]
+        version: [ "1.21", "1.21.4", "1.21.9", "1.21.10" ]
       max-parallel: 1 # Guarantee versions are published in this order
 
     steps:
