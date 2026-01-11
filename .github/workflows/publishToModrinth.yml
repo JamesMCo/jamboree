@@ -8,11 +8,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [ "1.21", "1.21.4", "1.21.9", "1.21.11" ]
-        noxesium: [ true ]
         include:
           - version: "1.21"
             noxesium: false
+          - version: "1.21.4"
+            noxesium: true
+          - version: "1.21.9"
+            noxesium: true
+          - version: "1.21.11"
+            noxesium: true
       max-parallel: 1 # Guarantee versions are published in this order
 
     steps:
