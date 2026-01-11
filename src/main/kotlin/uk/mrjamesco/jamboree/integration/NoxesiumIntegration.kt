@@ -1,8 +1,8 @@
-package uk.mrjamesco.jamboree
+package uk.mrjamesco.jamboree.integration
 
 import com.noxcrew.noxesium.core.fabric.mcc.MccNoxesiumEntrypoint
 
-object JamboreeNoxEntrypoint : MccNoxesiumEntrypoint() {
+object NoxesiumIntegration : MccNoxesiumEntrypoint() {
     private var initialized: Boolean = false
 
     private val waitingFuncs: MutableList<() -> Unit> = mutableListOf()

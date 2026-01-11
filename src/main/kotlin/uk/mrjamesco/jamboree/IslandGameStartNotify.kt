@@ -6,6 +6,7 @@ import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.Minecraft
 import uk.mrjamesco.jamboree.Jamboree.Companion.logger
 import uk.mrjamesco.jamboree.Util.requestAttentionIfNotActive
+import uk.mrjamesco.jamboree.integration.NoxesiumIntegration
 
 object IslandGameStartNotify {
     fun registerListeners() {
@@ -16,7 +17,7 @@ object IslandGameStartNotify {
 
         logger.info("Registering IslandGameStartNotify listeners")
 
-        JamboreeNoxEntrypoint.whenInitialized {
+        NoxesiumIntegration.whenInitialized {
             MccPackets.CLIENTBOUND_MCC_SERVER.addListener(this, ClientboundMccServerPacket::class.java) noxesiumPacket@{ _, packet, _ ->
                 // Only consider scenarios where the config option is enabled,
                 // we're joining an Island server that isn't a lobby, and

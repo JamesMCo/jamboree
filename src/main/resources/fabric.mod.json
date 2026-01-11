@@ -19,7 +19,7 @@
         ],
         "noxesium": [
             {
-                "value": "uk.mrjamesco.jamboree.JamboreeNoxEntrypoint",
+                "value": "uk.mrjamesco.jamboree.integration.NoxesiumIntegration",
                 "adapter": "kotlin"
             }
         ]
