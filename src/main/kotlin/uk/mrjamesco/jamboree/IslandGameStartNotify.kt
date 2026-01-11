@@ -1,12 +1,11 @@
 package uk.mrjamesco.jamboree
 
-import com.noxcrew.noxesium.core.mcc.ClientboundMccServerPacket
-import com.noxcrew.noxesium.core.mcc.MccPackets
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.Minecraft
 import uk.mrjamesco.jamboree.Jamboree.Companion.logger
 import uk.mrjamesco.jamboree.Util.requestAttentionIfNotActive
 import uk.mrjamesco.jamboree.integration.NoxesiumIntegration
+import uk.mrjamesco.jamboree.integration.NoxesiumIntegration.onClientboundMccServerPacket
 
 object IslandGameStartNotify {
     fun registerListeners() {
@@ -17,18 +16,16 @@ object IslandGameStartNotify {
 
         logger.info("Registering IslandGameStartNotify listeners")
 
-        NoxesiumIntegration.whenInitialized {
-            MccPackets.CLIENTBOUND_MCC_SERVER.addListener(this, ClientboundMccServerPacket::class.java) noxesiumPacket@{ _, packet, _ ->
-                // Only consider scenarios where the config option is enabled,
-                // we're joining an Island server that isn't a lobby, and
-                // the server has "game" in its type
-                if (!Config.IslandGameStartNotify.enabled || !Util.onMCCIsland || packet.server == "lobby" || "game" !in packet.types) {
-                    return@noxesiumPacket
-                }
-
-                // We're joining a game server
-                Minecraft.getInstance().window.requestAttentionIfNotActive()
+        NoxesiumIntegration.onClientboundMccServerPacket noxesiumPacket@{ packet ->
+            // Only consider scenarios where the config option is enabled,
+            // we're joining an Island server that isn't a lobby, and
+            // the server has "game" in its type
+            if (!Config.IslandGameStartNotify.enabled || !Util.onMCCIsland || packet.server == "lobby" || "game" !in packet.types) {
+                return@noxesiumPacket
             }
+
+            // We're joining a game server
+            Minecraft.getInstance().window.requestAttentionIfNotActive()
         }
     }
 }

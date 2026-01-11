@@ -1,7 +1,5 @@
 package uk.mrjamesco.jamboree.compactfishing
 
-import com.noxcrew.noxesium.core.mcc.ClientboundMccServerPacket
-import com.noxcrew.noxesium.core.mcc.MccPackets
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.network.chat.Component
@@ -9,6 +7,7 @@ import uk.mrjamesco.jamboree.Config
 import uk.mrjamesco.jamboree.Jamboree.Companion.logger
 import uk.mrjamesco.jamboree.integration.NoxesiumIntegration
 import uk.mrjamesco.jamboree.Util.onMCCIsland
+import uk.mrjamesco.jamboree.integration.NoxesiumIntegration.onClientboundMccServerPacket
 
 object CompactFishing {
     fun altIconOrder(iconText: String): Int = when (iconText) {
@@ -49,8 +48,8 @@ object CompactFishing {
         logger.info("Registering CompactFishing listeners")
 
         // Detect being in a fishing server
-        NoxesiumIntegration.whenInitialized {
-            MccPackets.CLIENTBOUND_MCC_SERVER.addListener(this, ClientboundMccServerPacket::class.java) { _, packet, _ -> onFishingIsland = (packet.server == "fishing") }
+        NoxesiumIntegration.onClientboundMccServerPacket { packet ->
+            onFishingIsland = (packet.server == "fishing")
         }
 
         // Detect fishing messages

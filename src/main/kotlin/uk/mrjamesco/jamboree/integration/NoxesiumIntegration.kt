@@ -1,6 +1,8 @@
 package uk.mrjamesco.jamboree.integration
 
 import com.noxcrew.noxesium.core.fabric.mcc.MccNoxesiumEntrypoint
+import com.noxcrew.noxesium.core.mcc.ClientboundMccServerPacket
+import com.noxcrew.noxesium.core.mcc.MccPackets
 
 object NoxesiumIntegration : MccNoxesiumEntrypoint() {
     private var initialized: Boolean = false
@@ -18,5 +20,9 @@ object NoxesiumIntegration : MccNoxesiumEntrypoint() {
             true -> f()
             false -> waitingFuncs.add(f)
         }
+    }
+
+    fun Any.onClientboundMccServerPacket(f: (ClientboundMccServerPacket) -> Unit) = whenInitialized {
+        MccPackets.CLIENTBOUND_MCC_SERVER.addListener(this, ClientboundMccServerPacket::class.java) { _, packet, _ -> f(packet) }
     }
 }
