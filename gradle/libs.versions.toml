@@ -6,7 +6,7 @@ fabric-loom = "1.14-SNAPSHOT"
 kotlin = "2.3.0"
 minecraft = "1.21.11"
 modmenu = "11.0.3"
-noxesium = "3.0.0-rc.1"
+noxesium = "3.0.0"
 slf4j = "2.0.16"
 yacl = "3.8.1+1.21.11-fabric"
 
