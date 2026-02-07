@@ -68,4 +68,15 @@ object CompactFishing {
             return@allowMessage true
         }
     }
+
+    fun maybeAlterMCCFishingMessages(message: Component): Boolean? {
+        // Force MCC Fishing Messages to pull messages if Compact Fishing has sent them,
+        // or to not pull messages if Compact Fishing has tried to block them
+        if (Config.CompactFishing.enabled && onMCCIsland && onFishingIsland) {
+            return Config.CompactFishing.mode.maybeAlterMCCFishingMessages(message)
+        }
+
+        // This isn't a message relating to catching a fish
+        return null
+    }
 }
