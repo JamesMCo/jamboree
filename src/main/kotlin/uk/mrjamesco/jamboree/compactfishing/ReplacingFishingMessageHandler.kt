@@ -7,7 +7,7 @@ import net.minecraft.network.chat.MutableComponent
 import uk.mrjamesco.jamboree.Config
 import uk.mrjamesco.jamboree.compactfishing.CompactFishing.altIconOrder
 import uk.mrjamesco.jamboree.compactfishing.CompactFishing.isCaughtMessage
-import uk.mrjamesco.jamboree.mixins.ChatComponentMixin
+import uk.mrjamesco.jamboree.mixins.minecraft.ChatComponentMixin
 
 /**
  * Sends initial caught messages immediately, and replaces
