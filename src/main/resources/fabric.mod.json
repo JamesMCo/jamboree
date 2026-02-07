@@ -19,7 +19,8 @@
         ]
     },
     "mixins": [
-        "jamboree.mixins.json"
+        "jamboree.mixins.json",
+        "jamboree-mccfishingmessages.mixins.json"
     ],
     "depends": {
         "fabricloader": ">=${fabric_loader_version}",
@@ -31,6 +32,9 @@
     },
     "recommends": {
         "noxesium": ">=${noxesium_version}"
+    },
+    "suggests": {
+        "mcc-fishing-messages": ">=${mccfishingmessages_version} <1.21.11"
     },
     "conflicts": {
         "chat_heads": "<1.0.0"

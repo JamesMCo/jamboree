@@ -4,6 +4,7 @@ fabric-kotlin = "1.13.5+kotlin.2.2.10"
 fabric-loader = "0.16.9"
 fabric-loom = "1.11-SNAPSHOT"
 kotlin = "2.2.10"
+mccfishingmessages = "1.1.5+1.21.8"
 minecraft = "1.21.4"
 modmenu = "11.0.3"
 noxesium = "2.6.1"
@@ -14,6 +15,7 @@ yacl = "3.6.1+1.21-fabric"
 fabric-api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric-api" }
 fabric-kotlin = { module = "net.fabricmc:fabric-language-kotlin", version.ref = "fabric-kotlin" }
 fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric-loader" }
+mccfishingmessages = { module = "maven.modrinth:mcc-fishing-messages-mod", version.ref="mccfishingmessages" }
 minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
 modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu" }
 noxesium = { module = "com.noxcrew.noxesium:fabric", version.ref = "noxesium"}

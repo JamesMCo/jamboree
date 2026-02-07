@@ -80,6 +80,17 @@ object CompactFishing {
         }
     }
 
+    fun maybeAlterMCCFishingMessages(message: Component): Boolean? {
+        // Force MCC Fishing Messages to pull messages if Compact Fishing has sent them,
+        // or to not pull messages if Compact Fishing has tried to block them
+        if (Config.CompactFishing.enabled && onMCCIsland && onFishingIsland) {
+            return Config.CompactFishing.mode.maybeAlterMCCFishingMessages(message)
+        }
+
+        // This isn't a message relating to catching a fish
+        return null
+    }
+
     fun maybeSendChatHeadsWarning() {
         if (!FabricLoader.getInstance().isModLoaded("chat_heads") ||
             FabricLoader.getInstance().getModContainer("chat_heads").get().metadata.version >= Version.parse("1.0.0")

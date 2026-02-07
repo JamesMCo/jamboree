@@ -1,0 +1,12 @@
+{
+  "required": false,
+  "package": "uk.mrjamesco.jamboree.mixins.mccfishingmessages",
+  "mixins": [],
+  "client": [
+    "MCCFishingMessagesModMixin"
+  ],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}

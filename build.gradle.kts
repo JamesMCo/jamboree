@@ -52,6 +52,8 @@ dependencies {
     modImplementation(libs.noxesium)
     modImplementation(libs.yacl)
 
+    modCompileOnly(libs.mccfishingmessages)
+
     implementation(libs.slf4j)
 
     transitiveInclude.resolvedConfiguration.resolvedArtifacts.forEach {
@@ -65,6 +67,7 @@ tasks {
         filesMatching("fabric.mod.json") {
             expand(getProperties() + mutableMapOf(
                 "version" to project.version,
+                "mccfishingmessages_version" to libs.mccfishingmessages.get(),
                 "minecraft_version" to libs.versions.minecraft.get(),
                 "fabric_kotlin_version" to libs.versions.fabric.kotlin.get(),
                 "fabric_loader_version" to libs.versions.fabric.loader.get(),

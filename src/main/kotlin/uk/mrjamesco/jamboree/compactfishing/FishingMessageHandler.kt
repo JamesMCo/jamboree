@@ -9,6 +9,7 @@ interface FishingMessageHandler {
     fun handleCaughtMessage(message: Component): Boolean
     fun handleIconMessage(message: Component): Boolean
     fun handleXPMessage(message: Component): Boolean
+    fun maybeAlterMCCFishingMessages(message: Component): Boolean?
 }
 
 enum class FishingMessageHandlers : NameableEnum {

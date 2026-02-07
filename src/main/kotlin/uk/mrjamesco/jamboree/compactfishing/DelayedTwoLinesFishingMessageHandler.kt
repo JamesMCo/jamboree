@@ -5,6 +5,9 @@ import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
 import uk.mrjamesco.jamboree.Config
 import uk.mrjamesco.jamboree.compactfishing.CompactFishing.altIconOrder
+import uk.mrjamesco.jamboree.compactfishing.CompactFishing.isCaughtMessage
+import uk.mrjamesco.jamboree.compactfishing.CompactFishing.isIconMessage
+import uk.mrjamesco.jamboree.compactfishing.CompactFishing.isXPMessage
 
 /**
  * Sends initial caught messages immediately, then collects icons and xp messages
@@ -106,4 +109,15 @@ object DelayedTwoLinesFishingMessageHandler : FishingMessageHandler {
             append(xpMessage!!)
         }
     } ?: Component.empty()
+
+    override fun maybeAlterMCCFishingMessages(message: Component): Boolean? =
+        when {
+            message.isCaughtMessage() -> true
+            message.isIconMessage() -> false
+            message.isXPMessage() -> false
+
+            sendingMessage -> true
+
+            else -> null
+        }
 }
