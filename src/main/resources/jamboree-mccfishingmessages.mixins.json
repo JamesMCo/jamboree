@@ -3,6 +3,8 @@
   "package": "uk.mrjamesco.jamboree.mixins.mccfishingmessages",
   "mixins": [],
   "client": [
+    "FishingChatBoxChatMessageMixin",
+    "FishingChatBoxMixin",
     "MCCFishingMessagesModMixin"
   ],
   "server": [],

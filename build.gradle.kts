@@ -48,11 +48,10 @@ dependencies {
 
     modImplementation(libs.fabric.kotlin)
     modImplementation(libs.fabric.api)
+    modImplementation(libs.mccfishingmessages)
     modImplementation(libs.modmenu)
     modImplementation(libs.noxesium)
     modImplementation(libs.yacl)
-
-    modCompileOnly(libs.mccfishingmessages)
 
     implementation(libs.slf4j)
 
