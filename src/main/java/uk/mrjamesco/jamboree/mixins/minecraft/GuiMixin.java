@@ -1,4 +1,4 @@
-package uk.mrjamesco.jamboree.mixins;
+package uk.mrjamesco.jamboree.mixins.minecraft;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
