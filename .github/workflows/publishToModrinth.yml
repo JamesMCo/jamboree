@@ -10,12 +10,16 @@ jobs:
       matrix:
         include:
           - version: "1.21"
+            mccfishingmessages: false
             noxesium: false
           - version: "1.21.4"
+            mccfishingmessages: true
             noxesium: true
           - version: "1.21.9"
+            mccfishingmessages: false
             noxesium: true
           - version: "1.21.11"
+            mccfishingmessages: true
             noxesium: true
       max-parallel: 1 # Guarantee versions are published in this order
 
@@ -63,4 +67,5 @@ jobs:
             fabric-api(required)
             ${{ matrix.noxesium && 'noxesium(optional)' || '' }}
             modmenu(optional)
+            ${{ matrix.mccfishingmessages && 'mcc-fishing-messages-mod(optional)' || '' }}
           # Loader and Minecraft versions should be parsed from fabric.mod.json
