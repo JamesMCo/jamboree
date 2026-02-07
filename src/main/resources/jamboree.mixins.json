@@ -1,11 +1,10 @@
 {
-  "package": "uk.mrjamesco.jamboree.mixins",
-  "mixins": [
-    "LevelRendererMixin"
-  ],
+  "package": "uk.mrjamesco.jamboree.mixins.minecraft",
+  "mixins": [],
   "client": [
     "ChatComponentMixin",
-    "GuiMixin"
+    "GuiMixin",
+    "LevelRendererMixin"
   ],
   "server": []
 }
