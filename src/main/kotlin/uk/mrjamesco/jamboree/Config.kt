@@ -173,13 +173,13 @@ class Config {
                 groups.register("chatding") {
                     name(Component.translatable("config.jamboree.chatding"))
 
-                    options.register<Boolean>("enabled") {
+                    options.register("enabled") {
                         name(Component.translatable("config.jamboree.chatding.enabled.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.chatding.enabled.description")))
                         binding(handler.instance()::chatDingEnabled, true)
                         controller(tickBox())
                     }
-                    options.register<uk.mrjamesco.jamboree.ChatDing.NotificationSound>("sound") {
+                    options.register("sound") {
                         name(Component.translatable("config.jamboree.chatding.sound.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.chatding.sound.description")))
                         binding(handler.instance()::chatDingSound, uk.mrjamesco.jamboree.ChatDing.NotificationSound.Chime)
@@ -188,7 +188,7 @@ class Config {
                         }
                         controller(enumDropdown<uk.mrjamesco.jamboree.ChatDing.NotificationSound>())
                     }
-                    options.register<Float>("pitch") {
+                    options.register("pitch") {
                         name(Component.translatable("config.jamboree.chatding.pitch.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.chatding.pitch.description")))
                         binding(handler.instance()::chatDingPitch, 1.0f)
@@ -197,7 +197,7 @@ class Config {
                         }
                         controller(slider(0.0f..2.0f, 0.1f))
                     }
-                    options.register<Int>("volume") {
+                    options.register("volume") {
                         name(Component.translatable("config.jamboree.chatding.volume.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.chatding.volume.description")))
                         binding(handler.instance()::chatDingVolume, 100)
@@ -219,13 +219,13 @@ class Config {
                             )
                         }
                     }
-                    options.register<Int>("cooldown") {
+                    options.register("cooldown") {
                         name(Component.translatable("config.jamboree.chatding.cooldown.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.chatding.cooldown.description")))
                         binding(handler.instance()::chatDingCooldown, 0)
                         controller(slider(0..10_000, 100) { Component.literal("${it / 1000.0} second${if (it == 1000) "" else "s"}") })
                     }
-                    options.register<Boolean>("flash") {
+                    options.register("flash") {
                         name(Component.translatable("config.jamboree.chatding.flash.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.chatding.flash.description")))
                         binding(handler.instance()::chatDingFlash, false)
@@ -244,7 +244,7 @@ class Config {
                 groups.register("adjustrendering") {
                     name(Component.translatable("config.jamboree.adjustrendering"))
 
-                    options.register<Boolean>("hideblockoutlines") {
+                    options.register("hideblockoutlines") {
                         name(Component.translatable("config.jamboree.adjustrendering.hideblockoutlines.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.adjustrendering.hideblockoutlines.description").apply {
                             append(Component.literal("\n"))
@@ -256,7 +256,7 @@ class Config {
                         controller(tickBox())
                     }
 
-                    options.register<Boolean>("hidescoreboard") {
+                    options.register("hidescoreboard") {
                         name(Component.translatable("config.jamboree.adjustrendering.hidescoreboard.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.adjustrendering.hidescoreboard.description").apply {
                             append(Component.literal("\n"))
@@ -276,31 +276,31 @@ class Config {
                 groups.register("compactfishing") {
                     name(Component.translatable("config.jamboree.compactfishing"))
 
-                    options.register<Boolean>("enabled") {
+                    options.register("enabled") {
                         name(Component.translatable("config.jamboree.compactfishing.enabled.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.compactfishing.enabled.description")))
                         binding(handler.instance()::compactFishingEnabled, false)
                         controller(tickBox())
                     }
-                    options.register<FishingMessageHandlers>("mode") {
+                    options.register("mode") {
                         name(Component.translatable("config.jamboree.compactfishing.mode.name"))
                         description(OptionDescription.of(FishingMessageHandlers.buildConfigDescription()))
                         binding(handler.instance()::compactFishingMode, FishingMessageHandlers.DelayedOneLine)
                         controller(enumDropdown<FishingMessageHandlers>())
                     }
-                    options.register<Boolean>("showicons") {
+                    options.register("showicons") {
                         name(Component.translatable("config.jamboree.compactfishing.showicons.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.compactfishing.showicons.description")))
                         binding(handler.instance()::compactFishingShowIcons, true)
                         controller(tickBox())
                     }
-                    options.register<Boolean>("useAltIconOrder") {
+                    options.register("useAltIconOrder") {
                         name(Component.translatable("config.jamboree.compactfishing.useAltIconOrder.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.compactfishing.useAltIconOrder.description")))
                         binding(handler.instance()::compactFishingUseAltIconOrder, false)
                         controller(tickBox())
                     }
-                    options.register<Boolean>("showxp") {
+                    options.register("showxp") {
                         name(Component.translatable("config.jamboree.compactfishing.showxp.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.compactfishing.showxp.description")))
                         binding(handler.instance()::compactFishingShowXP, true)
@@ -311,7 +311,7 @@ class Config {
                 groups.register("islandgamestartnotify") {
                     name(Component.translatable("config.jamboree.islandgamestartnotify"))
 
-                    options.register<Boolean>("enabled") {
+                    options.register("enabled") {
                         name(Component.translatable("config.jamboree.islandgamestartnotify.enabled.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.islandgamestartnotify.enabled.description")))
                         binding(handler.instance()::islandGameStartNotifyEnabled, false)
