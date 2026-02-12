@@ -31,7 +31,7 @@ class Config {
     var chatDingEnabled: Boolean = true
 
     @SerialEntry
-    var chatDingSound: uk.mrjamesco.jamboree.ChatDing.NotificationSound = uk.mrjamesco.jamboree.ChatDing.NotificationSound.Chime
+    var chatDingSound: uk.mrjamesco.jamboree.ChatDing.NotificationSound = uk.mrjamesco.jamboree.ChatDing.NotificationSound.default
 
     @SerialEntry
     var chatDingPitch: Float = 1.0f
@@ -182,7 +182,7 @@ class Config {
                     options.register("sound") {
                         name(Component.translatable("config.jamboree.chatding.sound.name"))
                         description(OptionDescription.of(Component.translatable("config.jamboree.chatding.sound.description")))
-                        binding(handler.instance()::chatDingSound, uk.mrjamesco.jamboree.ChatDing.NotificationSound.Chime)
+                        binding(handler.instance()::chatDingSound, uk.mrjamesco.jamboree.ChatDing.NotificationSound.default)
                         addListener { option, _ ->
                             pendingChatDingNotificationSound = option.pendingValue().sound
                         }

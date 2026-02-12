@@ -61,6 +61,9 @@ object ChatDing {
         };
 
         abstract val sound: SoundEvent
+        companion object {
+            val default: NotificationSound = Chime
+        }
     }
 
     private var latestTrigger: Instant = Instant.DISTANT_PAST
