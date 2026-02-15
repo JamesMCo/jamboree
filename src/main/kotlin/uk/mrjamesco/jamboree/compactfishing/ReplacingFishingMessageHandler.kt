@@ -23,6 +23,7 @@ object ReplacingFishingMessageHandler : FishingMessageHandler {
     private var caughtMessage: MutableComponent? = null
     private val iconBuffer: MutableList<Pair<MutableComponent, Int>> = mutableListOf()
     private var xpMessage: MutableComponent? = null
+    private var sentMessageInVanillaChat: Boolean = true
 
     override fun handleCaughtMessage(message: Component): Boolean {
         caughtMessage = message.copy()
@@ -31,6 +32,12 @@ object ReplacingFishingMessageHandler : FishingMessageHandler {
         // Therefore, we need to clear the icons and xp message
         iconBuffer.clear()
         xpMessage = null
+
+        // Check whether the message is going to be pulled by the MCC Fishing Messages mod
+        sentMessageInVanillaChat = !(
+            FabricLoader.getInstance().isModLoaded("mcc-fishing-messages") &&
+            MCCFishingMessagesMod.fishingChatBox.isVisible
+        )
 
         // Updating message as new info received immediately,
         // so we need to let the initial message through
@@ -114,7 +121,8 @@ object ReplacingFishingMessageHandler : FishingMessageHandler {
                     }
                 }
             }
-        } else {
+        }
+        if (sentMessageInVanillaChat) {
             (Minecraft.getInstance().gui.chat as ChatComponentMixin).apply replaceExistingCatchMessage@{
                 allMessages.forEachIndexed { i, message ->
                     if (message.content.isCaughtMessage()) {
