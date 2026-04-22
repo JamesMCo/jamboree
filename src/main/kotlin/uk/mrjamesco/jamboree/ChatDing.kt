@@ -53,6 +53,18 @@ object ChatDing {
         Snare {
             override val sound: SoundEvent = SoundEvents.NOTE_BLOCK_SNARE.value()
         },
+        Trumpet {
+            override val sound: SoundEvent = SoundEvents.NOTE_BLOCK_TRUMPET.value()
+        },
+        TrumpetExposed {
+            override val sound: SoundEvent = SoundEvents.NOTE_BLOCK_TRUMPET_EXPOSED.value()
+        },
+        TrumpetOxidized {
+            override val sound: SoundEvent = SoundEvents.NOTE_BLOCK_TRUMPET_OXIDIZED.value()
+        },
+        TrumpetWeathered {
+            override val sound: SoundEvent = SoundEvents.NOTE_BLOCK_TRUMPET_WEATHERED.value()
+        },
         Vibraphone {
             override val sound: SoundEvent = SoundEvents.NOTE_BLOCK_IRON_XYLOPHONE.value()
         },
