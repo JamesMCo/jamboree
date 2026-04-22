@@ -86,7 +86,7 @@ object DelayedTwoLinesFishingMessageHandler : FishingMessageHandler {
         // Make sure there's something that needs to be shown before sending a message
         if (iconBuffer.isNotEmpty() || xpMessage != null) {
             sendingMessage = true
-            Minecraft.getInstance().player?.displayClientMessage(buildIconXPMessage(), false)
+            Minecraft.getInstance().player?.sendSystemMessage(buildIconXPMessage())
             sendingMessage = false
         }
 

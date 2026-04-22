@@ -21,6 +21,9 @@ jobs:
           - version: "1.21.11"
             mccfishingmessages: true
             noxesium: true
+          - version: "26.1"
+            mccfishingmessages: false
+            noxesium: true
       max-parallel: 1 # Guarantee versions are published in this order
 
     steps:

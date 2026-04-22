@@ -43,15 +43,13 @@ val transitiveInclude: Configuration by configurations.creating {
 
 dependencies {
     minecraft(libs.minecraft)
-    mappings(loom.officialMojangMappings())
-    modImplementation(libs.fabric.loader)
+    implementation(libs.fabric.loader)
 
-    modImplementation(libs.fabric.kotlin)
-    modImplementation(libs.fabric.api)
-    modImplementation(libs.mccfishingmessages)
-    modImplementation(libs.modmenu)
-    modImplementation(libs.noxesium)
-    modImplementation(libs.yacl)
+    implementation(libs.fabric.kotlin)
+    implementation(libs.fabric.api)
+    implementation(libs.modmenu)
+    implementation(libs.noxesium)
+    implementation(libs.yacl)
 
     implementation(libs.slf4j)
 
@@ -66,7 +64,6 @@ tasks {
         filesMatching("fabric.mod.json") {
             expand(getProperties() + mutableMapOf(
                 "version" to project.version,
-                "mccfishingmessages_version" to libs.mccfishingmessages.get(),
                 "minecraft_version" to libs.versions.minecraft.get(),
                 "fabric_kotlin_version" to libs.versions.fabric.kotlin.get(),
                 "fabric_loader_version" to libs.versions.fabric.loader.get(),
@@ -78,28 +75,12 @@ tasks {
 
     jar {
         from("LICENSE")
-    }
-
-    remapJar {
         archiveFileName = "jamboree-${version}+${libs.versions.minecraft.get()}.jar"
-    }
-
-    publishing {
-        publications {
-            create<MavenPublication>("mavenJava") {
-                artifact(remapJar) {
-                    builtBy(remapJar)
-                }
-                artifact(kotlinSourcesJar) {
-                    builtBy(remapSourcesJar)
-                }
-            }
-        }
     }
 
     compileKotlin {
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_21)
+            jvmTarget.set(JvmTarget.JVM_25)
             optIn.add("kotlin.time.ExperimentalTime")
         }
     }

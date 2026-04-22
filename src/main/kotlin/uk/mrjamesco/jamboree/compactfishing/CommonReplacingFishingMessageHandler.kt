@@ -1,8 +1,6 @@
 package uk.mrjamesco.jamboree.compactfishing
 
-import com.deflanko.MCCFishingMessages.MCCFishingMessagesMod
-import net.fabricmc.loader.api.FabricLoader
-import net.minecraft.client.GuiMessage
+import net.minecraft.client.multiplayer.chat.GuiMessage
 import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
@@ -11,7 +9,6 @@ import uk.mrjamesco.jamboree.compactfishing.CompactFishing.altIconOrder
 import uk.mrjamesco.jamboree.compactfishing.CompactFishing.isCaughtMessage
 import uk.mrjamesco.jamboree.compactfishing.CompactFishing.isIconMessage
 import uk.mrjamesco.jamboree.compactfishing.CompactFishing.isXPMessage
-import uk.mrjamesco.jamboree.mixins.mccfishingmessages.FishingChatBoxMixin
 import uk.mrjamesco.jamboree.mixins.minecraft.ChatComponentMixin
 
 /**
@@ -24,7 +21,6 @@ abstract class CommonReplacingFishingMessageHandler : FishingMessageHandler {
     protected var caughtMessage: MutableComponent? = null
     protected val iconBuffer: MutableList<Pair<MutableComponent, Int>> = mutableListOf()
     protected var xpMessage: MutableComponent? = null
-    protected var sentMessageInVanillaChat: Boolean = true
 
     override fun handleCaughtMessage(message: Component): Boolean {
         caughtMessage = message.copy()
@@ -33,12 +29,6 @@ abstract class CommonReplacingFishingMessageHandler : FishingMessageHandler {
         // Therefore, we need to clear the icons and xp message
         iconBuffer.clear()
         xpMessage = null
-
-        // Check whether the message is going to be pulled by the MCC Fishing Messages mod
-        sentMessageInVanillaChat = !(
-            FabricLoader.getInstance().isModLoaded("mcc-fishing-messages") &&
-            MCCFishingMessagesMod.fishingChatBox.isVisible
-        )
 
         // Updating message as new info received immediately,
         // so we need to let the initial message through
@@ -91,37 +81,19 @@ abstract class CommonReplacingFishingMessageHandler : FishingMessageHandler {
 
         // Only need to toggle sendingCompactMessage when sending a new message
         // (replacing an existing message doesn't trigger ClientReceiveMessageEvents.ALLOW_GAME)
-        if (FabricLoader.getInstance().isModLoaded("mcc-fishing-messages")) {
-            (MCCFishingMessagesMod.fishingChatBox as FishingChatBoxMixin).apply replaceExistingCatchMessage@{
-                messages.forEach { messageContainer ->
-                    val message = messageContainer.chatHudLine
-                    if (message.content.isCaughtMessage()) {
-                        // Compact messages start with caught messages, so will match the same regex
-                        messageContainer.chatHudLine = GuiMessage(
-                            message.addedTime,
-                            buildCompactMessage(),
-                            message.signature,
-                            message.tag
-                        )
-                        return@replaceExistingCatchMessage
-                    }
-                }
-            }
-        }
-        if (sentMessageInVanillaChat) {
-            (Minecraft.getInstance().gui.chat as ChatComponentMixin).apply replaceExistingCatchMessage@{
-                allMessages.forEachIndexed { i, message ->
-                    if (message.content.isCaughtMessage()) {
-                        // Compact messages start with caught messages, so will match the same regex
-                        allMessages[i] = GuiMessage(
-                            message.addedTime,
-                            buildCompactMessage(),
-                            message.signature,
-                            message.tag
-                        )
-                        refreshChat()
-                        return@replaceExistingCatchMessage
-                    }
+        (Minecraft.getInstance().gui.chat as ChatComponentMixin).apply replaceExistingCatchMessage@{
+            allMessages.forEachIndexed { i, message ->
+                if (message.content.isCaughtMessage()) {
+                    // Compact messages start with caught messages, so will match the same regex
+                    allMessages[i] = GuiMessage(
+                        message.addedTime,
+                        buildCompactMessage(),
+                        message.signature,
+                        message.source,
+                        message.tag
+                    )
+                    refreshChat()
+                    return@replaceExistingCatchMessage
                 }
             }
         }

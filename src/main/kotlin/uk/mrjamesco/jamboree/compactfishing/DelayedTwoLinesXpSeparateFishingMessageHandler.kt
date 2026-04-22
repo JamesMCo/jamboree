@@ -83,7 +83,7 @@ object DelayedTwoLinesXpSeparateFishingMessageHandler : FishingMessageHandler {
         }
 
         sendingMessage = true
-        Minecraft.getInstance().player?.displayClientMessage(buildCompactMessage(), false)
+        Minecraft.getInstance().player?.sendSystemMessage(buildCompactMessage())
         sendingMessage = false
 
         return false
