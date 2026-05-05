@@ -14,14 +14,19 @@ jobs:
         include:
           - branch: "1.21"
             version: "1.21"
+            java: "21"
           - branch: "1.21.4"
             version: "1.21.4"
+            java: "21"
           - branch: "1.21.9"
             version: "1.21.9"
+            java: "21"
           - branch: "1.21.11"
             version: "1.21.11"
+            java: "21"
           - branch: "main"
             version: "26.1"
+            java: "25"
 
     steps:
       - name: "📂 Check-Out Repository"
@@ -31,7 +36,7 @@ jobs:
       - name: "☕ Set Up JDK"
         uses: actions/setup-java@v4
         with:
-          java-version: "25"
+          java-version: ${{ matrix.java }}
           distribution: "temurin"
           cache: "gradle"
       - name: "☕ Set Up Gradle"
