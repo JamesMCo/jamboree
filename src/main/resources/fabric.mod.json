@@ -13,7 +13,7 @@
         ],
         "modmenu": [
             {
-                "value": "uk.mrjamesco.jamboree.ModMenuIntegration",
+                "value": "uk.mrjamesco.jamboree.integration.ModMenuIntegration",
                 "adapter": "kotlin"
             }
         ]
