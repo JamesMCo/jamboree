@@ -1,6 +1,5 @@
 package uk.mrjamesco.jamboree
 
-import dev.isxander.yacl3.api.LabelOption
 import dev.isxander.yacl3.api.ListOption
 import dev.isxander.yacl3.api.OptionDescription
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler
