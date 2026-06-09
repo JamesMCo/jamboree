@@ -17,3 +17,11 @@ _(Some features require [Noxesium](https://modrinth.com/mod/noxesium) - see belo
 - 🏝️ MCC Island Features
   - Compact Fishing: combine multiple messages shown when catching a fish on MCC Island in to one message (requires Noxesium, compatible with [MCC Fishing Messages](https://modrinth.com/mod/mcc-fishing-messages-mod) mod)
   - Island Game Start Notify: cause the window icon to flash when tabbed out while joining a game server on MCC Island, such as when a game queue has filled (requires Noxesium)
+
+---
+
+For the curious, here are the changes that necessitate releases for different versions of Minecraft:
+
+- **`1.21-1.21.8` -> `1.21.9`**: `com.mojang.blaze3d.platform.Window.getWindow()` is renamed to `com.mojang.blaze3d.platform.Window.getHandle()`
+- **`1.21.9-1.21.10` -> `1.21.11`**: Support is added for MCCI functionality
+- **`1.21.11` -> `26.1`**: Minecraft jar is deobfuscated
