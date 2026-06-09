@@ -17,9 +17,6 @@ repositories {
     maven("https://maven.isxander.dev/releases") {
         name = "Xander Maven"
     }
-    maven("https://maven.noxcrew.com/public") {
-        name = "Noxcrew Public Maven Repository"
-    }
     maven("https://maven.enginehub.org/repo/") {
         name = "EngineHub"
     }
@@ -49,7 +46,6 @@ dependencies {
     modImplementation(libs.fabric.kotlin)
     modImplementation(libs.fabric.api)
     modImplementation(libs.modmenu)
-    modImplementation(libs.noxesium)
     modImplementation(libs.yacl)
 
     implementation(libs.slf4j)
@@ -68,7 +64,6 @@ tasks {
                 "minecraft_version" to libs.versions.minecraft.get(),
                 "fabric_kotlin_version" to libs.versions.fabric.kotlin.get(),
                 "fabric_loader_version" to libs.versions.fabric.loader.get(),
-                "noxesium_version" to libs.versions.noxesium.get(),
                 "yacl_version" to libs.versions.yacl.get()
             ))
         }

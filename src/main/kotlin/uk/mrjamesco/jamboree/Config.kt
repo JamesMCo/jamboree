@@ -134,7 +134,7 @@ class Config {
             get() = handler.instance().compactFishingShowXP
 
         val mode: FishingMessageHandler
-            get() = handler.instance().compactFishingMode.get()
+            get() = error("Tried to get the current Fishing Message Handler on a version which does not support Compact Fishing")
     }
 
     object IslandGameStartNotify {
@@ -272,6 +272,17 @@ class Config {
 
             categories.register("mcci") {
                 name(Component.translatable("config.jamboree.heading.mcci"))
+
+                rootOptions.registerLabel("nomcci",
+                    Component.empty().apply {
+                        style = Style.EMPTY.withBold(true)
+                        append(Component.translatable("config.jamboree.nomcci.header").apply {
+                            style = Style.EMPTY.withColor(ChatFormatting.RED)
+                        })
+                        append(Component.literal("\n"))
+                        append(Component.translatable("config.jamboree.nomcci.body"))
+                    }
+                )
 
                 groups.register("compactfishing") {
                     name(Component.translatable("config.jamboree.compactfishing"))
