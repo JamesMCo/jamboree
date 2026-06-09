@@ -12,12 +12,9 @@ jobs:
           - version: "1.21"
             mccfishingmessages: false
             noxesium: false
-          - version: "1.21.4"
-            mccfishingmessages: true
-            noxesium: true
           - version: "1.21.9"
             mccfishingmessages: false
-            noxesium: true
+            noxesium: false
           - version: "1.21.11"
             mccfishingmessages: true
             noxesium: true
