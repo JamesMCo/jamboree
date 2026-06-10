@@ -22,6 +22,14 @@ _(Some features require [Noxesium](https://modrinth.com/mod/noxesium) - see belo
 
 For the curious, here are the changes that necessitate releases for different versions of Minecraft:
 
-- **`1.21-1.21.8` -> `1.21.9`**: `com.mojang.blaze3d.platform.Window.getWindow()` is renamed to `com.mojang.blaze3d.platform.Window.getHandle()`
-- **`1.21.9-1.21.10` -> `1.21.11`**: Support is added for MCCI functionality
-- **`1.21.11` -> `26.1`**: Minecraft jar is deobfuscated
+- **`1.21-1.21.8` -> `1.21.9`**
+  - `com.mojang.blaze3d.platform.Window.getWindow()` is renamed to `com.mojang.blaze3d.platform.Window.getHandle()`
+  - `net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents` is removed
+    - This API is reintroduced in a new form in `1.21.10` as `net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderEvents`, but isn't used in this project until another change justifies maintaining a new version branch
+- **`1.21.9-1.21.10` -> `1.21.11`**
+  - Support is added for MCCI functionality
+- **`1.21.11` -> `26.1`**
+  - Minecraft jar is deobfuscated
+  - `net.minecraft.client.GuiMessage` is moved to `net.minecraft.client.multiplayer.chat.GuiMessage`
+  - `net.minecraft.client.player.LocalPlayer.displayClientMessage()` is split into two, with this project using `net.minecraft.client.player.LocalPlayer.sendSystemMessage()`
+  - `net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderEvents` is renamed to `net.fabricmc.fabric.api.client.rendering.v1.level.LevelRenderEvents`
