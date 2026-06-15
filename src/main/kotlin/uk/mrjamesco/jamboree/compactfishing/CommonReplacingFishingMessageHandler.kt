@@ -81,7 +81,7 @@ abstract class CommonReplacingFishingMessageHandler : FishingMessageHandler {
 
         // Only need to toggle sendingCompactMessage when sending a new message
         // (replacing an existing message doesn't trigger ClientReceiveMessageEvents.ALLOW_GAME)
-        (Minecraft.getInstance().gui.chat as ChatComponentMixin).apply replaceExistingCatchMessage@{
+        (Minecraft.getInstance().gui.hud.chat as ChatComponentMixin).apply replaceExistingCatchMessage@{
             allMessages.forEachIndexed { i, message ->
                 if (message.content.isCaughtMessage()) {
                     // Compact messages start with caught messages, so will match the same regex

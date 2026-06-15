@@ -21,8 +21,11 @@ jobs:
           - branch: "1.21.11"
             version: "1.21.11"
             java: "21"
-          - branch: "main"
+          - branch: "26.1"
             version: "26.1"
+            java: "25"
+          - branch: "main"
+            version: "26.2"
             java: "25"
 
     steps:

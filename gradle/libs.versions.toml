@@ -1,14 +1,14 @@
 [versions]
-fabric-api = "0.147.0+26.1.2"
-fabric-kotlin = "1.13.11+kotlin.2.3.21"
-fabric-loader = "0.19.2"
-fabric-loom = "1.16-SNAPSHOT"
-kotlin = "2.3.21"
-minecraft = "26.1"
-modmenu = "18.0.0-alpha.8"
+fabric-api = "0.152.1+26.2"
+fabric-kotlin = "1.13.12+kotlin.2.4.0"
+fabric-loader = "0.19.3"
+fabric-loom = "1.17-SNAPSHOT"
+kotlin = "2.4.0"
+minecraft = "26.2"
+modmenu = "20.0.0-beta.2"
 noxesium = "3.1.0"
 slf4j = "2.0.16"
-yacl = "3.9.3+26.1-fabric"
+yacl = "3.9.4+26.2-fabric"
 
 [libraries]
 fabric-api = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric-api" }
