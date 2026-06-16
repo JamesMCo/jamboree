@@ -3,7 +3,7 @@
   "mixins": [],
   "client": [
     "ChatComponentMixin",
-    "GuiMixin"
+    "HudMixin"
   ],
   "server": []
 }
