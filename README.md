@@ -35,3 +35,4 @@ For the curious, here are the changes that necessitate releases for different ve
   - `net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderEvents` is renamed to `net.fabricmc.fabric.api.client.rendering.v1.level.LevelRenderEvents`
 - **`26.1` -> `26.2`**
   - `net.minecraft.client.gui.Gui.getChat()` is moved to `net.minecraft.client.gui.Hud.getChat()`
+  - `net.minecraft.client.gui.Gui.displayScoreboardSidebar()` is moved to `net.minecraft.client.gui.Hud.displayScoreboardSidebar()`
