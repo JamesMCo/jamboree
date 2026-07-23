@@ -18,9 +18,8 @@ object IslandGameStartNotify {
 
         NoxesiumIntegration.onClientboundMccServerPacket noxesiumPacket@{ packet ->
             // Only consider scenarios where the config option is enabled,
-            // we're joining an Island server that isn't a lobby, and
-            // the server has "game" in its type
-            if (!Config.IslandGameStartNotify.enabled || !Util.onMCCIsland || packet.server == "lobby" || "game" !in packet.types) {
+            // and we're joining an Island server that is of the server type "game" or "dojo"
+            if (!Config.IslandGameStartNotify.enabled || !Util.onMCCIsland || (packet.server != "game" && packet.server != "dojo")) {
                 return@noxesiumPacket
             }
 
