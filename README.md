@@ -36,3 +36,5 @@ For the curious, here are the changes that necessitate releases for different ve
 - **`26.1` -> `26.2`**
   - `net.minecraft.client.gui.Gui.getChat()` is moved to `net.minecraft.client.gui.Hud.getChat()`
   - `net.minecraft.client.gui.Gui.displayScoreboardSidebar()` is moved to `net.minecraft.client.gui.Hud.displayScoreboardSidebar()`
+- **`26.2` -> `26.3`**
+  - `org.lwjgl.glfw.GLFW` usage is replaced by `org.lwjgl.sdl.SDLVideo`
