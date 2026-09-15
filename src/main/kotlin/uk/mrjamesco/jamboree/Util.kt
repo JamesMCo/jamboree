@@ -2,7 +2,7 @@ package uk.mrjamesco.jamboree
 
 import com.mojang.blaze3d.platform.Window
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents
-import org.lwjgl.glfw.GLFW
+import org.lwjgl.sdl.SDLVideo
 import uk.mrjamesco.jamboree.Jamboree.Companion.logger
 
 object Util {
@@ -17,9 +17,9 @@ object Util {
     }
 
     val Window.isActive: Boolean
-        get() = GLFW.glfwGetWindowAttrib(handle(), GLFW.GLFW_FOCUSED) != 0
+        get() = (SDLVideo.SDL_GetWindowFlags(handle()) and SDLVideo.SDL_WINDOW_INPUT_FOCUS) != 0L
 
-    fun Window.requestAttention() = GLFW.glfwRequestWindowAttention(handle())
+    fun Window.requestAttention() = SDLVideo.SDL_FlashWindow(handle(), SDLVideo.SDL_FLASH_BRIEFLY)
 
     fun Window.requestAttentionIfNotActive() {
         if (!isActive) {
